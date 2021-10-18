@@ -8,7 +8,7 @@
     "dev": "nodemon server.js",
     "prod": "NODE_ENV=production nodemon server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir  ./public/js -o bundle.js",
-    "build:js": "parcel build ./public/js/index.js  --out-file output.js "
+    "build:js": "parcel build ./public/js/index.js --out-dir  ./public/js -o bundle.js "
   },
   "author": "hamza belghazi",
   "license": "ISC",
