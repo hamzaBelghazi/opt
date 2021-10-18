@@ -1,0 +1,234 @@
+extends base
+
+append head
+  script(src='./js/ckeditor.js')
+  script(src='js/sample.js')
+
+
+
+block content
+  section.section.user-panel.admin--panel
+    .panel_navigation
+      h1.nav_panel_item Admin Dashboard
+      ul.nav_panel
+        li.nav_panel_item
+          a.nav_panel_link(data-tab='1' href='#')
+            span.material-icons add_photo_alternate 
+            span.text Add banners
+        li.nav_panel_item
+          a.nav_panel_link(data-tab='2' href='#')
+            span.material-icons  shopping_basket 
+            span.text Manage products
+        li.nav_panel_item
+          a.nav_panel_link(data-tab='3' href='#')
+            span.material-icons  bookmark_border 
+            span.text Manage Orders
+        li.nav_panel_item
+          a.nav_panel_link(data-tab='4' href='#')
+            span.material-icons  window 
+            span.text Lenses Setting
+        li.nav_panel_item
+          a.nav_panel_link(data-tab='5' href='#')
+            span.material-icons  add 
+            span.text Add products
+        li.nav_panel_item
+          a.nav_panel_link.active(data-tab='6' href='#')
+            span.material-icons  add_to_photos 
+            span.text Collections
+        li.nav_panel_item
+          a.nav_panel_link(data-tab='7' href='#')
+            span.material-icons  playlist_add 
+            span.text Categories
+        li.nav_panel_item
+          a.nav_panel_link(data-tab='8' href='#')
+            span.material-icons  campaign
+            span.text Add Anouncement
+        li.nav_panel_item
+          a.nav_panel_link(data-tab='9' href='#')
+            span.material-icons note_add
+            span.text Add Pages
+    .setting_overview
+      .banner_setting.setting.setting--1
+        h3 Add banners
+        .old_ones.old_banners
+          each b in banners
+            .old-banner
+              img.old_banner_img(src=`/img/banners/${b.slide}` alt='#')
+              span.delete_old_banner( data-banner=`${b.id}`) x
+        form#banner--form.banner--form
+          label#banner-img-label(for='banner-img')
+            span banner upload
+            input#banner-img.banner-img(type='file' max='1')
+          label(for='banner-url')
+          input#banner-url.banner-url(type='text' placeholder='http://')
+          input.banner_add--btn(type='submit' value='add banner')
+      .manage_products.setting.setting--2
+        h3 manage products
+        .list_prod
+          ul.products--list
+            each p in products
+              li.prod
+                a.prod--name
+                  img(src=`/img/products/${p.images[0]}` alt=`${p.title}`)
+                  span= p.title
+                .controls
+                  span.delete--prode(data-id=`${p.id}`) Delete
+      .manage-orders#orders.orders.setting.setting--3
+        h1 Orders overview
+        .orders_wraper
+          each o in orders 
+            .order(class=`${o.isComplet == 'true' ? 'recived' : ''}`)
+              .order_number='# '+ o.orderNum
+              each p in o.products
+                .order_price= p.price + '€'      
+              .controls
+                if o.isComplet == 'true'
+                  p complted!
+                else
+                  span.edit--order(data-id=`${o.id}`) complet
+                span.delete--order(data-id=`${o.id}`) Delete      
+      .lenes_setting.setting.setting--4
+        h3 update Lense
+        .lenses_wrapper
+          form#lenes-form.lense_form(data-id=`${lenses[0].id}`)
+            input#lenses-title(type='text' name='title' value=`${lenses[0].title}` )
+            h3 Lenses Type
+            .lent_type
+              each tp , i in lenses[0].lensType
+                .type
+                  input.lenses_type(type='text' name=`lensType[${i}][subtitle]` value=`${tp.subtitle}` )
+                  textarea.description_type_lense(type='text' name=`lensType[${i}][desc]` value=`${tp.desc}`)= tp.desc
+              button.add_lense_type_btn +
+            h3 thikness
+            .thikness
+              each tk , i in lenses[0].thickness
+                .thik
+                  input.thikness_title(type='text' name=`thickness[${i}][subtitle]`  value=`${tk.subtitle}`)
+                  textarea.thikness_description(name=`thickness[${i}][desc]`  value=`${tk.desc}`)= tk.desc
+                  input.thikness_refraction(type='text' name=`thickness[${i}][refraction]`  value=`${tk.refraction || ''}` placeholder='refraction')
+                  input.thikness_preview(type='file' name=`thickness[${i}][photo]`  value=`${tk.photo}`)
+                  input.thickness_price(type='number' name=`thickness[${i}][price]`  value=`${tk.price}` placeholder='price')
+              button.add_thikness_btn +
+            h3 advanced lenes Type
+            .ad_lense_type
+              each atp , i in lenses[0].advancedLensType
+                .adType
+                  input.ad_type_title(type='text' name=`advancedLensType[${i}][subtitle]` value=`${atp.subtitle}` placeholder='title')
+                  textarea.ad_type_description(name=`advancedLensType[${i}][desc]` value=`${atp.desc}` placeholder='description')= atp.desc
+                  input.ad_type_price(type='number' name=`advancedLensType[${i}][price]` value=`${atp.price}` min='0' placeholder='price')
+              button.add_advanced_btn +
+            input.save_lenses_btn(type='submit' value='Save')
+      .add_product_setting.setting.setting--5.active
+        h3 Add Product
+        .glass_wrapper
+          form#product-form.product--form
+            h4 glasses setting
+            .first_prod_set
+              input#prod_title(type='text' placeholder='title' name='title')
+              input#prod_glassWidth(type='number' placeholder='glassWidth' name='glassWidth')
+              input#prod_price(type='number' placeholder='$' name='price')
+              input#prod_sideSize(type='number' placeholder='sideSize' name='sideSize')
+              input#prod_lenseSize(type='number' placeholder='lenseSize' name='lenseSize')
+              input#prod_lenseHeight(type='number' placeholder='lenseheight' name='lenseHeight')
+              input#prod_noasSize(type='number' placeholder='noasSize' name='noasSize')
+              input#prod_shape(type='text' name='shape' placeholder='shape')
+              input#prod_colors(type='text' placeholder='colors' name='colors')
+              input#prod_frameType(type='text' placeholder='frameType' name='frameType')
+              input#prod_templeColor(type='text' placeholder='templeColor' name='templeColor')
+              input#prod_productGender(type='text' placeholder='productGender' name='productGender')
+              input#prod_frameMaterial(type='text' name='frameMatirial' placeholder='frameMaterial')
+            h4 glasses relations
+            .sec_prod_set
+              select#glasses--Type(name='glassesType')
+                option(value='') Glasses Type
+                option(value='prescription') Prescription
+                option(value='sunglasses') Sunglasses
+              select#glasses--collections(name='collections')
+                option(value='') collections
+                each c in collections
+                  option(value=`${c.id}`)= c.name
+              select#glasses--categories(name='categories')
+                option(value='') categories
+                each c in categories
+                  option(value=`${c.id}`)= c.name
+              select#glasses--lenses(placeholder='lenses' name='lenses')
+                option(value='') lenses
+                each l in lenses
+                  option(value=`${l.id}`)= l.title
+              
+            h4 glasses previews
+            .product_imgs
+              label.pre_img(for='img_1')
+                input#img_1.prod_img_preview(type='file' name='images')
+              label(for='img_2')
+                input#img_2.prod_img_preview(type='file' name='images')
+              label(for='img_3')
+                input#img_3.prod_img_preview(type='file' name='images')
+              label(for='img_4')
+                input#img_4.prod_img_preview(type='file' name='images')
+              label(for='img_5')
+                input#img_5.prod_img_preview(type='file' name='images')
+            h4 description
+            .last_set
+              textarea#prod_description(name='description' cols='30' rows='10')
+            input.add_glasses_btn(type='submit' value='Poste')
+          h3 add 3D Objects for Try-on
+          form#try_on_form.add_virtuals
+            input#selected_prod.selected_prod(type='text' name='productId' value=``)
+            input#vurtial_inputs(type='file' name='virtualsObject' multiple='')
+            input.add_virtual_btn(type='submit' value='Save')
+      .banner_setting.setting.setting--6
+        h3 manage Collections
+        .old_ones.old--collections
+          each c in collections
+            .old-banner
+              img.old_banner_img(src=`/img/collection/${c.collectionImage}` alt='#')
+              span.delete_old_collection(data-id=`${c.id}`) x
+        form#collection--form.banner--form
+          label#banner-img-label(for='collection-thumbnail')
+            span collection thumbnail
+            input#collection-thumbnail.collection-img(type='file' max='1')
+          label(for='collection')
+          input#collection-name.collection(type='text' placeholder='Collection Name')
+          input#collection-desc.collection(type='text' placeholder='Collection desc')
+          input.collection_add--btn(type='submit' value='Save')
+      .banner_setting.setting.setting--7
+        h3 manage Categories
+        .old_ones.old--categories
+          each cat in categories
+            .old-banner
+              img.old_banner_img(src=`/img/category/${cat.categoryImage}` alt=`${cat.name}`)
+              span.delete_old_category(data-id=`${cat.id}`) x
+         
+        form#category--form.banner--form
+          label#banner-img-label(for='category-img')
+            span Categorie Image
+            input#category-img.category-img(type='file' max='1')
+          label(for='Categorie')
+          input#category-name.Categorie(type='text' placeholder='Categorie Name')
+          input.category_add--btn(type='submit' value='Save')
+      .banner_setting.setting.setting--8
+        h3 Add banners
+        .old_announces
+          each an in announces
+            .announce
+              span.announce--body= an.announceText
+              span.announce--delete(data-id=`${an.id}`) x 
+        form#announce--form.banner--form
+          label(for='announce-body')
+          input#announce-body.announce-body(type='text' placeholder='announce-body')
+          label(for='announce')
+          input.announce(type='submit' value='Announce')
+      .pages_setting.setting.setting--9
+        .old--pages
+          each p in pages
+            .page
+              span.old_page_name=p.name
+              span.delete_old_page(data-id=`${p.id}`) x
+        h3 Add pages
+        form#page-form.page--form
+          input#page-name(type='text' name='page-name'  placeholder='Name of the page')
+          textarea#text_editor(name='text_editor')
+          input.post_page_btn(type='submit' value='Post')
+  script.
+    initSample()

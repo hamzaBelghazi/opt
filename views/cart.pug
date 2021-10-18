@@ -1,0 +1,94 @@
+extends base
+
+block content
+  section.cart_section
+    .marq
+      marquee
+        .marquee    
+          span FREE WORLDWIDE HOME DELIVERY   
+          span 30 DAYS FREE RETURNS 
+          span LIFETIME WARRANTY     
+          span VIRTUAL TRY-ON 
+          span FREE WORLDWIDE HOME DELIVERY   
+          span 30 DAYS FREE RETURNS 
+          span LIFETIME WARRANTY     
+          span VIRTUAL TRY-ON   
+    .cart_wraper
+      - if (list && list.length !== 0)
+        .products_table
+          each i  in list
+            if i.item.type === 'glassesWithlense'
+              .product
+                a.remove_from_cart.remove_item__cart(href='#' data-id=`${i.item.id}`)
+                  span.material-icons
+                    | remove_shopping_cart
+                img.product_cart_preview(src='./images/charles-deluvio-Pk3gCC49mCk-unsplash.jpg' alt='')
+                .description_cart
+                  h3.product_cart_title= `${ i.item.item.title} + 2xEyeglasses for ${ i.item.lenses.lensesType.type} ${ i.item.lenses.thicknessType.type || 'no'} thikness , and ${ i.item.lenses.advancedLensesType.type || '...'}`
+                  p= `Pd: ${ i.item.lenses['total-spd'] || i.item.lenses['right-spd'] + i.item.lenses['left-spd'] }mm`
+                  .lense_table
+                    .params-tbl
+                      .derection
+                        span.params-header
+                        span right
+                        span left
+                      div
+                        span.params-header SPH
+                        span.right-sph= `${ i.item.lenses['right-sph'] || ''}`
+                        span.left-sph= `${ i.item.lenses['left-sph'] || ''}`
+                      div
+                        span.params-header CYL
+                        span.right-cyl= `${ i.item.lenses['right-cyl'] || ''}`
+                        span.left-cyl= `${ i.item.lenses['left-cyl'] || ''} `
+                      if i.item.lenses['right-a'] || i.item.lenses['left-a']
+                        .add-p
+                          span.params-header ADD
+                          span.right-a= `${ i.item.lenses['right-a'] || ''}`
+                          span.left-a= `${ i.item.lenses['left-a'] || ''}`
+                      div
+                        span.params-header AX
+                        span.right-ax= `${ i.item.lenses['right-ax'] || ''}`
+                        span.left-ax= `${ i.item.lenses['left-ax'] || ''}`
+                .product_price
+                  span.price= i.item.price
+                  span.curency $
+
+            else
+              .product
+                a.remove_from_cart.remove_item__cart(href='#' data-id=`${i.item.id}`)
+                  span.material-icons
+                    | remove_shopping_cart
+                img.product_cart_preview(src=`/img/products/${i.item.images[0]}` alt=`${i.item.title}`)
+                .description_cart
+                  h3.product_cart_title= i.item.title
+                  .props_product
+                    .quantity.prop
+                      span.subtitle_prop  Quantity 
+                      input#guantity.change_quantity(type="number" value=`${i.quantity}` min="1" max="15" data-id =`${i.item.id}`)
+                    .frame_width.prop
+                      span.subtitle_prop  Frame width 
+                      span.frame_width_value= i.item.lenseSize + 'mm' 
+                    .quantity.prop
+                      span.subtitle_prop  Delevery time
+                      span.quantity_value  6-12 days
+                .product_price
+                  span.price= i.price
+                  span.curency $
+         
+      - if (list.length !== 0)         
+        .checkout_wrapper
+          //- .check_info
+          //-   form#coupon-form.coupon_wraper
+          //-     input.coupon(type='text' placeholder='coupon code')
+          //-     input(type='submit' value='Use Coupon')
+          //-   .delevry
+          //-     span.material-icons.icon  local_shipping 
+          //-     span  free shipping 
+          .total_wrapper
+            .subtotal
+              span.total Total:
+              span.total_price= totalPrice + '$'
+            .check
+              a.checkout_btn(href='#') CHECKOUT
+    - if (list.length == 0)
+      h1.cart_empty Your cart is empty!

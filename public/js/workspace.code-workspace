@@ -1,0 +1,16 @@
+{
+  "folders": [
+	{
+		"path": ".."
+	},
+	{
+		"path": "../../../Downloads/jeelizGlassesVTOWidget-master/images"
+	},
+	{
+		"path": "../../../Downloads/jeelizGlassesVTOWidget-master/glasses3D"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "msOpticsTemplate"
+  }
+}

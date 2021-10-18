@@ -1,0 +1,102 @@
+
+
+mixin navItem(link, text)
+  li
+    a(href=`${link}`)
+      |#{text}
+
+.navigation__menu
+  .nav.nav-top
+    button.drop-down-language
+      img.country_img(src='/images/en.png' alt='')
+    ul.language-list.hidden
+        li.language-item
+          a.language-link(href='/setlocale/en' data-lang='en')
+            img.icon_cntry(width='20' src='/images/en.png' alt='')
+            |                   English
+        li.language-item
+          a.language-link(href='/setlocale/de' data-lang='de')
+            img.icon_cntry(width='20' src='/images/de.png' alt='')
+            |                   Deutsch  
+       
+    span.material-icons.close--menu  close 
+  ul.nav.main-nav
+    if user
+      +navItem("/account" , "Account")
+    else
+      +navItem("/login" , "login/register")
+    +navItem("/frames" , "Perscription Glasses")
+    +navItem("/sunglasses" , "sunglasses")
+.cart
+  .nav.nav-top
+    span.material-icons  shopping_cart 
+    | Your Cart
+    span.material-icons.close--cart  close 
+  .cart_items_wrapper
+    if (list && list.length !== 0)
+      each i in list 
+        if i.item.type === 'glassesWithlense'
+          .item
+              div.items_img_wr
+                img(src=`/img/products/${i.item.item.images[0]}` alt=`${i.item.item.title}`)
+                img.lense_img(src=`/images/lenes.png`)
+              .desc_item
+                h3.item_name= i.item.item.title
+                p
+                  | Quantity: 
+                  span.item_quantity= i.quantity
+                p
+                  | lenses: 
+                  if i.item.lenses.lensesType
+                    span.item_lens= i.item.lenses.lensesType.type
+                  else if i.item.lenses.thicknessType
+                    span.item_lens= i.item.lenses.thicknessType.type
+                  else if i.item.lenses.advancedLensesType
+                    span.item_lens= i.item.lenses.advancedLensesType.type
+              a.remove_from_cart.remove_item__cart(href='#' data-id=`${i.item.id}`)    
+                span.material-icons.delete_item  close 
+        else 
+          .item
+            div.items_img_wr
+                img(src=`/img/products/${i.item.images[0]}` alt=`${i.item.title}`)
+            .desc_item
+                h3.item_name= i.item.title
+                p
+                  | Quantity: 
+                  span.item_quantity= i.quantity
+                p
+                  | lense width: 
+                  span.item_lens= i.item.lenseSize +"mm"
+
+            a.remove_from_cart.remove_item__cart(href='#' data-id=`${i.item.id}`)    
+                span.material-icons.delete_item  close 
+        
+  .go_to_cart_wrapper
+    a.go_to_cart(href='/cart') Go to cart
+header.header
+  .container
+    .navigation
+      p.menu_btn.menu-toggle
+        span.material-icons.menu_icon  menu 
+        span.menu-text Menu
+      span.material-icons.search  search 
+    .search--bar
+      form.search--form
+        input#search_input.search_input(type='text' name='search' placeholder='Search...')
+      span.material-icons.search--close  close 
+    .logo
+      a.logo_text(href='/') mhsOptics.
+    .account
+      span.material-icons.account--login(alt='login' title='login')
+        | perm_identity
+      .loging--dropdown.login--open
+        - if (!user)      
+          a(href='/login')
+            span #{__('login')}
+          a(href='/register') #{__('register')}
+        - if (user)
+          a(href='/account') account
+          a.nav__el--logout(href='') logout
+
+      span.material-icons.mdl-badge.cart--toggle(data-badge=`${session.cart && session.cart.totalQuantity ? session.cart.totalQuantity :  '0'}`)
+        | shopping_cart

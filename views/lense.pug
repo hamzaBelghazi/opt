@@ -1,0 +1,545 @@
+extends base
+block append head
+  script(src="https://unpkg.com/@panzoom/panzoom@4.4.1/dist/panzoom.min.js")
+
+block content
+  .pd-content.hidden
+    span.close-pd x
+    .pd-musered
+      .video_container
+        .output
+          canvas#canvas.canvas  
+        #capture.capture
+          video#video.video
+            | Video stream not available.
+        #drag-1.draggable.left-pupil
+        #drag-2.draggable.right-pupil
+        #select-cc.shape.draggable
+      .rslt
+        h3.remarque.your-pd
+          | you can zoom in / out the capture to let the credit card fit
+          | rectangle.
+        .pd_controllers
+          button#startbutton
+            img(src='/images/cap.png' alt='capture')
+          button.dist resulte
+          input.range-input(type="range" min="0.1" max="4" step="0.1" value="1")
+        .guide
+          img.guide_img(src='/images/hqdefault.jpeg' alt='')
+  // /* lense */
+  .main-wraper
+    .lense_wraper
+      .lenses-type
+        h1 lenses type
+        .type
+          if lens[0].lensType
+            each lt in lens[0].lensType
+              label.lighting(for=`${lt.subtitle.split(" ")[0]}`)
+                input(id=`${lt.subtitle.split(" ")[0]}` value=`${lt.subtitle.split(" ")[0]}` type='radio' name='lens')
+                .desc
+                  span=lt.subtitle
+                  p.description-lens= lt.desc          
+      .parametre
+        h1 Parametre
+        .parametre-ayes
+          .ayes
+            .space
+            .right
+              span.right-aye right
+            .left
+              span.left-aye left
+          .Power
+            .space
+              span Power
+            .right
+              select#primaryPower(name='primaryPower' data-preview='right-sph')
+                option(value='') Select
+                option(value='-12.00') -12.00
+                option(value='-11.75') -11.75
+                option(value='-11.50') -11.50
+                option(value='-11.25') -11.25
+                option(value='-11.00') -11.00
+                option(value='-10.75') -10.75
+                option(value='-10.50') -10.50
+                option(value='-10.25') -10.25
+                option(value='-10.00') -10.00
+                option(value='9.75') 9.75
+                option(value='-9.50') -9.50
+                option(value='-9.25') -9.25
+                option(value='-9.00') -9.00
+                option(value='-8.75') -8.75
+                option(value='-8.50') -8.50
+                option(value='-8.25') -8.25
+                option(value='-8.00') -8.00
+                option(value='-7.75') -7.75
+                option(value='-7.50') -7.50
+                option(value='-7.25') -7.25
+                option(value='-7.00') -7.00
+                option(value='-6.75') -6.75
+                option(value='-6.50') -6.50
+                option(value='-6.25') -6.25
+                option(value='-6.00') -6.00
+                option(value='-5.75') -5.75
+                option(value='-5.50') -5.50
+                option(value='-5.25') -5.25
+                option(value='-5.00') -5.00
+                option(value='-4.75') -4.75
+                option(value='-4.50') -4.50
+                option(value='-4.25') -4.25
+                option(value='-4.00') -4.00
+                option(value='-3.75') -3.75
+                option(value='-3.50') -3.50
+                option(value='-3.25') -3.25
+                option(value='-3.00') -3.00
+                option(value='-2.75') -2.75
+                option(value='-2.50') -2.50
+                option(value='-2.25') -2.25
+                option(value='-2.00') -2.00
+                option(value='-1.75') -1.75
+                option(value='-1.50') -1.50
+                option(value='-1.25') -1.25
+                option(value='-1.00') -1.00
+                option(value='-0.75') -0.75
+                option(value='-0.50') -0.50
+                option(value='-0.25') -0.25
+                option(selected='selected' value='-0.00') 0.00
+                option(value='+0.25') +0.25
+                option(value='+0.50') +0.50
+                option(value='+0.75') +0.75
+                option(value='+1.00') +1.00
+                option(value='+1.25') +1.25
+                option(value='+1.50') +1.50
+                option(value='+1.75') +1.75
+                option(value='+2.00') +2.00
+                option(value='+2.25') +2.25
+                option(value='+2.50') +2.50
+                option(value='+2.75') +2.75
+                option(value='+3.00') +3.00
+                option(value='+3.25') +3.25
+                option(value='+3.50') +3.50
+                option(value='+3.75') +3.75
+                option(value='+4.00') +4.00
+                option(value='+4.25') +4.25
+                option(value='+4.50') +4.50
+                option(value='+4.75') +4.75
+                option(value='+5.00') +5.00
+                option(value='+5.25') +5.25
+                option(value='+5.50') +5.50
+                option(value='+5.75') +5.75
+                option(value='+6.00') +6.00
+            .left
+              select#secondaryPower(name='secondaryPower' data-preview='left-sph')
+                option(value='') Select
+                option(value='-12.00') -12.00
+                option(value='-11.75') -11.75
+                option(value='-11.50') -11.50
+                option(value='-11.25') -11.25
+                option(value='-11.00') -11.00
+                option(value='-10.75') -10.75
+                option(value='-10.50') -10.50
+                option(value='-10.25') -10.25
+                option(value='-10.00') -10.00
+                option(value='9.75') 9.75
+                option(value='-9.50') -9.50
+                option(value='-9.25') -9.25
+                option(value='-9.00') -9.00
+                option(value='-8.75') -8.75
+                option(value='-8.50') -8.50
+                option(value='-8.25') -8.25
+                option(value='-8.00') -8.00
+                option(value='-7.75') -7.75
+                option(value='-7.50') -7.50
+                option(value='-7.25') -7.25
+                option(value='-7.00') -7.00
+                option(value='-6.75') -6.75
+                option(value='-6.50') -6.50
+                option(value='-6.25') -6.25
+                option(value='-6.00') -6.00
+                option(value='-5.75') -5.75
+                option(value='-5.50') -5.50
+                option(value='-5.25') -5.25
+                option(value='-5.00') -5.00
+                option(value='-4.75') -4.75
+                option(value='-4.50') -4.50
+                option(value='-4.25') -4.25
+                option(value='-4.00') -4.00
+                option(value='-3.75') -3.75
+                option(value='-3.50') -3.50
+                option(value='-3.25') -3.25
+                option(value='-3.00') -3.00
+                option(value='-2.75') -2.75
+                option(value='-2.50') -2.50
+                option(value='-2.25') -2.25
+                option(value='-2.00') -2.00
+                option(value='-1.75') -1.75
+                option(value='-1.50') -1.50
+                option(value='-1.25') -1.25
+                option(value='-1.00') -1.00
+                option(value='-0.75') -0.75
+                option(value='-0.50') -0.50
+                option(value='-0.25') -0.25
+                option(selected='selected' value='-0.00') 0.00
+                option(value='+0.25') +0.25
+                option(value='+0.50') +0.50
+                option(value='+0.75') +0.75
+                option(value='+1.00') +1.00
+                option(value='+1.25') +1.25
+                option(value='+1.50') +1.50
+                option(value='+1.75') +1.75
+                option(value='+2.00') +2.00
+                option(value='+2.25') +2.25
+                option(value='+2.50') +2.50
+                option(value='+2.75') +2.75
+                option(value='+3.00') +3.00
+                option(value='+3.25') +3.25
+                option(value='+3.50') +3.50
+                option(value='+3.75') +3.75
+                option(value='+4.00') +4.00
+                option(value='+4.25') +4.25
+                option(value='+4.50') +4.50
+                option(value='+4.75') +4.75
+                option(value='+5.00') +5.00
+                option(value='+5.25') +5.25
+                option(value='+5.50') +5.50
+                option(value='+5.75') +5.75
+                option(value='+6.00') +6.00
+          .Cylinder
+            .space
+              span Cylinder
+            .right
+              select#primaryCylinder(name='primaryCylinder' data-preview='right-cyl')
+                option(value='-3.00') -3.00
+                option(value='-2.75') -2.75
+                option(value='-2.50') -2.50
+                option(value='-2.25') -2.25
+                option(value='-2.00') -2.00
+                option(value='-1.75') -1.75
+                option(value='-1.50') -1.50
+                option(value='-1.25') -1.25
+                option(value='-1.00') -1.00
+                option(value='-0.75') -0.75
+                option(value='-0.50') -0.50
+                option(value='-0.25') -0.25
+                option(value='0.00' selected='selected') 0.00
+                option(value='+0.25') +0.25
+                option(value='+0.50') +0.50
+                option(value='+0.75') +0.75
+                option(value='+1.00') +1.00
+                option(value='+1.25') +1.25
+                option(value='+1.50') +1.50
+                option(value='+1.75') +1.75
+                option(value='+2.00') +2.00
+                option(value='+2.25') +2.25
+                option(value='+2.50') +2.50
+                option(value='+2.75') +2.75
+                option(value='+3.00') +3.00
+            .left
+              select#seondaryCylinder(name='seondaryCylinder' data-preview='left-cyl')
+                option(value='-3.00') -3.00
+                option(value='-2.75') -2.75
+                option(value='-2.50') -2.50
+                option(value='-2.25') -2.25
+                option(value='-2.00') -2.00
+                option(value='-1.75') -1.75
+                option(value='-1.50') -1.50
+                option(value='-1.25') -1.25
+                option(value='-1.00') -1.00
+                option(value='-0.75') -0.75
+                option(value='-0.50') -0.50
+                option(value='-0.25') -0.25
+                option(value='0.00' selected='selected') 0.00
+                option(value='+0.25') +0.25
+                option(value='+0.50') +0.50
+                option(value='+0.75') +0.75
+                option(value='+1.00') +1.00
+                option(value='+1.25') +1.25
+                option(value='+1.50') +1.50
+                option(value='+1.75') +1.75
+                option(value='+2.00') +2.00
+                option(value='+2.25') +2.25
+                option(value='+2.50') +2.50
+                option(value='+2.75') +2.75
+                option(value='+3.00') +3.00
+          .Axis
+            .space
+              span Axis
+            .right
+              select#primaryAxis(name='primaryAxis' data-preview='right-ax')
+            .left
+              select#seondaryAxis(name='seondaryAxis' data-preview='left-ax')
+          .Addition.hidden
+            .space
+              span Addition
+            .right
+              select#primaryAddition(name='primaryAddition' data-preview='right-a')
+                option(value='0.00' selected='selected') 0.00
+                option(value='+0.25') +0.25
+                option(value='+0.50') +0.50
+                option(value='+0.75') +0.75
+                option(value='+1.00') +1.00
+                option(value='+1.25') +1.25
+                option(value='+1.50') +1.50
+                option(value='+1.75') +1.75
+                option(value='+2.00') +2.00
+                option(value='+2.25') +2.25
+                option(value='+2.50') +2.50
+                option(value='+2.75') +2.75
+                option(value='+3.00') +3.00
+                option(value='+3.25') +3.25
+                option(value='+3.50') +3.50
+                option(value='+3.75') +3.75
+                option(value='+4.00') +4.00
+            .left
+              select#seondaryAddition(name='seondaryAddition' data-preview='left-a')
+                option(value='0.00' selected='selected') 0.00
+                option(value='+0.25') +0.25
+                option(value='+0.50') +0.50
+                option(value='+0.75') +0.75
+                option(value='+1.00') +1.00
+                option(value='+1.25') +1.25
+                option(value='+1.50') +1.50
+                option(value='+1.75') +1.75
+                option(value='+2.00') +2.00
+                option(value='+2.25') +2.25
+                option(value='+2.50') +2.50
+                option(value='+2.75') +2.75
+                option(value='+3.00') +3.00
+                option(value='+3.25') +3.25
+                option(value='+3.50') +3.50
+                option(value='+3.75') +3.75
+                option(value='+4.00') +4.00
+          .PD
+            .space
+              span PD
+            .right
+              select#onePD(name='onePD' data-preview='total-spd')
+                option(value='0' selected='selected') Set PD
+                option(value='42') 42
+                option(value='43') 43
+                option(value='44') 44
+                option(value='45') 45
+                option(value='46') 46
+                option(value='47') 47
+                option(value='48') 48
+                option(value='49') 49
+                option(value='50') 50
+                option(value='51') 51
+                option(value='52') 52
+                option(value='53') 53
+                option(value='54') 54
+                option(value='55') 55
+                option(value='56') 56
+                option(value='57') 57
+                option(value='58') 58
+                option(value='59') 59
+                option(value='60') 60
+                option(value='61') 61
+                option(value='62') 62
+                option(value='63') 63
+                option(value='64') 64
+                option(value='65') 65
+                option(value='66') 66
+                option(value='67') 67
+                option(value='68') 68
+                option(value='69') 69
+                option(value='70') 70
+                option(value='71') 71
+                option(value='72') 72
+              select#primaryPD.hidden(name='primaryPD' data-preview='right-spd')
+                option(value='0' selected='selected') right PD
+                option(value='22') 22
+                option(value='22.5') 22.5
+                option(value='23') 23
+                option(value='23.5') 23.5
+                option(value='24') 24
+                option(value='24.5') 24.5
+                option(value='25') 25
+                option(value='25.5') 25.5
+                option(value='26') 26
+                option(value='26.5') 26.5
+                option(value='27') 27
+                option(value='27.5') 27.5
+                option(value='28') 28
+                option(value='28.5') 28.5
+                option(value='29') 29
+                option(value='29.5') 29.5
+                option(value='30') 30
+                option(value='30.5') 30.5
+                option(value='31') 31
+                option(value='31.5') 31.5
+                option(value='32') 32
+                option(value='32.5') 32.5
+                option(value='33') 33
+                option(value='33.5') 33.5
+                option(value='34') 34
+                option(value='34.5') 34.5
+                option(value='35') 35
+                option(value='35.5') 35.5
+                option(value='36') 36
+                option(value='36.5') 36.5
+                option(value='37') 37
+                option(value='37.5') 37.5
+                option(value='38') 38
+                option(value='38.5') 38.5
+                option(value='39') 39
+                option(value='39.5') 39.5
+                option(value='40') 40
+            .left
+              select#seondaryPD.hidden(name='seondaryPD' data-preview='left-spd')
+                option(value='0' selected='selected') left PD
+                option(value='22') 22
+                option(value='22.5') 22.5
+                option(value='23') 23
+                option(value='23.5') 23.5
+                option(value='24') 24
+                option(value='24.5') 24.5
+                option(value='25') 25
+                option(value='25.5') 25.5
+                option(value='26') 26
+                option(value='26.5') 26.5
+                option(value='27') 27
+                option(value='27.5') 27.5
+                option(value='28') 28
+                option(value='28.5') 28.5
+                option(value='29') 29
+                option(value='29.5') 29.5
+                option(value='30') 30
+                option(value='30.5') 30.5
+                option(value='31') 31
+                option(value='31.5') 31.5
+                option(value='32') 32
+                option(value='32.5') 32.5
+                option(value='33') 33
+                option(value='33.5') 33.5
+                option(value='34') 34
+                option(value='34.5') 34.5
+                option(value='35') 35
+                option(value='35.5') 35.5
+                option(value='36') 36
+                option(value='36.5') 36.5
+                option(value='37') 37
+                option(value='37.5') 37.5
+                option(value='38') 38
+                option(value='38.5') 38.5
+                option(value='39') 39
+                option(value='39.5') 39.5
+                option(value='40') 40
+          label#pd-check(for='have-pd')
+            input#have-pd(type='checkbox' name='have-pd' onclick='havTwoPd()')
+            span have two PDs!
+        .params-tbl-wraper
+          .params-tbl
+            .derection
+              span.params-header
+              span right
+              span left
+            div
+              span.params-header SPH
+              span.right-sph
+              span.left-sph
+            div
+              span.params-header CYL
+              span.right-cyl
+              span.left-cyl
+            .add-p.hidden
+              span.params-header ADD
+              span.right-a
+              span.left-a
+            div
+              span.params-header AX
+              span.right-ax
+              span.left-ax
+          .params-pd
+            span.params-header PD
+            svg.pd-img(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 134.15 60.12')
+              path.cls-1(d='M134.15,1.4c0-.77-26-1.4-58.16-1.4C-23.95,0-6.24,2.68,22.4,2.82A24.65,24.65,0,1,0,56.58,27.44c7-7.74,13.87-8.11,21.2,0A24.65,24.65,0,1,0,111.91,2.82C125.43,2.75,134.15,2.45,134.15,1.4ZM32,48.35a23,23,0,1,1,23-23A23,23,0,0,1,32,48.35Zm24.62-22.8A24.68,24.68,0,0,0,41.52,2.82H65.09l1.06,16.7C64,20,59.16,21.53,56.58,25.55Zm21,0C75,21.55,70.16,20,68,19.49L69.1,2.79H92.67a24.69,24.69,0,0,0-15,22.76Zm47.66-.21a23,23,0,1,1-23-23,23.3,23.3,0,0,1,4.78.5,23,23,0,0,1,18.28,22.5Z')
+              path.cls-1(d='M33.83,25A2.06,2.06,0,1,1,31.76,23h.07A2.06,2.06,0,0,1,33.83,25Z')
+              circle.cls-1(cx='102.49' cy='24.99' r='2.06')
+              line.cls-2(x1='31.78' y1='60.07' x2='102.49' y2='60.07')
+              line.cls-2(x1='31.78' y1='25.26' x2='31.78' y2='60.11')
+              line.cls-2(x1='67.14' y1='25.1' x2='67.14' y2='60.07')
+              line.cls-2(x1='102.49' y1='25.24' x2='102.49' y2='60.09')
+            .spd-ayes
+              span.left-spd
+              span.right-spd
+              span.total-spd
+      .ms-pd
+        span#try-on.ms-pd-span.try-on Measure PD online
+        span.ms-pd-span
+          a(href='https://msoptics.be/wp-content/uploads/2021/03/ruller-mspotics.pdf' target='_blank') Measure by Ruller
+      .Benefits
+        h3 Benefits
+        .benefit-wraper
+          .benefit
+            img(src='/images/frame-icon-uv-crulle.png')
+            .benefit-text
+              p.benefit-desc UV FILTER
+          .benefit
+            img(src='/images/frame-icon-protection-crulle.png')
+            .benefit-text
+              p.benefit-desc HARDENED
+          .benefit
+            img(src='/images/frame-icon-cleaning-crulle.png')
+            .benefit-text
+              p.benefit-desc SELF-CLEANING COATING
+          .benefit
+            img(src='/images/frame-icon-hydro-crulle.png')
+            .benefit-text
+              p.benefit-desc SUPERHYDROPHOBIC COATING
+          .benefit
+            img(src='/images/frame-icon-antireflex-crulle.png')
+            .benefit-text
+              p.benefit-desc ANTI-REFLECTIVE
+      .Thickness-type
+        h1 Thickness
+        .type
+          if lens[0].thickness
+            each tk in lens[0].thickness
+              label(for=`${tk.subtitle.split(" ")[0]}` )
+                input#Standard(value=`${tk.subtitle.split(" ")[0]}` data-p=`${tk.price}` type='radio' name='thickness' required='')
+                .thik-desc
+                  span.title-tk= tk.subtitle
+                  p.description-thickness=tk.refraction
+                    small.bold=tk.desc
+                  p.price-tickness
+                    span.price= tk.price + '$'         
+      .ad-lenses-type
+        h1 Advanced lens type
+        .type
+          if lens[0].advancedLensType
+            each al in lens[0].advancedLensType
+              label(for=`${al.subtitle.split(" ")[0]}` )
+                input#BLUEBLOCKER(type='radio' value=`${al.subtitle.split(" ")[0]}` data-p=`${al.price}` name='advanced-lens' required='')
+                .thik-desc
+                  span.title=al.subtitle
+                  p.description= al.desc
+                  p.price
+                    span.price= al.price + "$"
+                      
+    main.product-section
+      section.product-wraper
+        h3=product.title
+        img(src=`/img/products/${product.images[0]}`)
+        .frames_price
+          .custom-div-prices
+            span Frames
+            span= product.price + '$' 
+        .params-price
+          .custom-div-prices
+            span Thickness
+            p
+              | + 
+              span.custom-thik-price 0 
+          .custom-div-prices
+            span Advanced lens type
+            p
+              | + 
+              span.custom-alt-price 0
+              |  $
+          .total-div-prices
+            span total
+            p
+              | 
+              span.custom-total-price= product.price
+              |  $    
+        a.add_lenses_to_cart(href='#' data-id=`${product.id}`) add to cart

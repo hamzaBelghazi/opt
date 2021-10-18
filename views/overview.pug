@@ -1,0 +1,82 @@
+extends base
+
+block content
+  section.hero
+    .slider
+      each banner in banners
+        .slide
+          a.slide_link(href=`/${banner.link}`)
+            img(src=`img/banners/${banner.slide}` alt='banner')
+      span.material-icons.slider__btn.slider__btn--left
+        | navigate_before
+      span.material-icons.slider__btn.slider__btn--right
+        | navigate_next
+      .dots
+  .marq
+    marquee
+      .marquee    
+        span FREE WORLDWIDE HOME DELIVERY   
+        span 30 DAYS FREE RETURNS 
+        span LIFETIME WARRANTY     
+        span VIRTUAL TRY-ON 
+        span FREE WORLDWIDE HOME DELIVERY   
+        span 30 DAYS FREE RETURNS 
+        span LIFETIME WARRANTY     
+        span VIRTUAL TRY-ON   
+            
+       
+  section.category--section.section
+    .section__title
+      h2.section__description discover
+      h3.section__header Latest Mhsoptics Glasses.
+    .categories
+      each cat in categories
+        a.cat-link(href='#')
+          .cat-cart
+            img(src=`/img/category/${cat.categoryImage}` alt=`${cat.name}`)
+            .cat--title
+              span.cat--subtitle= cat.name
+            .cat--title--outer
+              span.cat--subtitle= cat.name
+            .cat--info
+              span.cat--subtitle discover
+    
+  section.selected--item.section
+    .section__title
+      h2.section__description Discover
+      h3.section__header Our Best Seller.
+    .catalogue.best_seller
+      each p in products
+        .product_cart
+          img.product_preview(src=`/img/products/${p.images[0]}` alt=`${p.title}`)
+          span.product_title= p.title
+          a.product_actions(href=`product/${p.id}`)
+            span.price= p.price + '$'
+            span.try_on
+              span.material-icons  videocam 
+      
+    .see_all
+      a.shop_all(href='/products') Shop all
+  section.collections.section
+    .section__title
+      h2.section__description Discover
+      h3.section__header Our Collection
+    .collections_wrapper.slider2
+      each col in collections
+        .collection.slide2
+          a(href=`/collections/${col.name}`)
+            img.collection_preview(src=`/img/collection/${col.collectionImage}` alt=`${col.name}`)
+            .collection_desc
+              span.collection_title=col.name
+              span.collection_over=col.desc           
+      span.material-icons.slider__btn.slider__btn--left2
+        | navigate_before
+      span.material-icons.slider__btn.slider__btn--right2
+        | navigate_next
+  if announces
+    .announces
+     each an in announces 
+      .announce
+        span.close_ann.material-icons close
+        p.ann_body= an.announceText
+    
