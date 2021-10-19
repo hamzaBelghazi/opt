@@ -37,12 +37,12 @@ const app = express();
 
 const i18n = new I18n();
 
-const DB = process.env.DATA_BASE_LOCAL;
+// const DB = process.env.DATA_BASE_LOCAL;
 
-// const DB = process.env.DATA_BASE_STR.replace(
-//   '<PASSWORD>',
-//   process.env.DATA_BASE_PASS
-// );
+const DB = process.env.DATA_BASE_STR.replace(
+  '<PASSWORD>',
+  process.env.DATA_BASE_PASS
+);
 
 mongoose
   .connect(DB, {
