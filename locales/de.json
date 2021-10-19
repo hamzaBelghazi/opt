@@ -1,5 +1,7 @@
 {
   "login": "Inloggen",
   "register": "inschrijven",
-  "lang": "de"
+  "lang": "de",
+  "account": "Rekening",
+  "logout": "uitloggen"
 }

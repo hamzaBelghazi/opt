@@ -1,5 +1,7 @@
 {
   "login": "Signin",
   "register": "Signup",
-  "lang": "en"
+  "lang": "en",
+  "account": "Account",
+  "logout": "log out"
 }

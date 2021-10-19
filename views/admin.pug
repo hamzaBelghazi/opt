@@ -1,8 +1,8 @@
 extends base
 
 append head
-  script(src='./js/ckeditor.js')
-  script(src='js/sample.js')
+  script(src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js")
+  script(src='js/chEditor/sample.js')
 
 
 
@@ -12,7 +12,7 @@ block content
       h1.nav_panel_item Admin Dashboard
       ul.nav_panel
         li.nav_panel_item
-          a.nav_panel_link(data-tab='1' href='#')
+          a.nav_panel_link.active(data-tab='1' href='#')
             span.material-icons add_photo_alternate 
             span.text Add banners
         li.nav_panel_item
@@ -32,7 +32,7 @@ block content
             span.material-icons  add 
             span.text Add products
         li.nav_panel_item
-          a.nav_panel_link.active(data-tab='6' href='#')
+          a.nav_panel_link(data-tab='6' href='#')
             span.material-icons  add_to_photos 
             span.text Collections
         li.nav_panel_item
@@ -48,7 +48,7 @@ block content
             span.material-icons note_add
             span.text Add Pages
     .setting_overview
-      .banner_setting.setting.setting--1
+      .banner_setting.setting.setting--1.active
         h3 Add banners
         .old_ones.old_banners
           each b in banners
@@ -94,31 +94,54 @@ block content
             input#lenses-title(type='text' name='title' value=`${lenses[0].title}` )
             h3 Lenses Type
             .lent_type
-              each tp , i in lenses[0].lensType
+              if lenses
+                each tp , i in lenses[0].lensType
+                  .type
+                    input.lenses_type(type='text' name=`lensType[${i}][subtitle]` value=`${tp.subtitle}` )
+                    textarea.description_type_lense(type='text' name=`lensType[${i}][desc]` value=`${tp.desc}`)= tp.desc
+                button.add_lense_type_btn +
+              else 
                 .type
-                  input.lenses_type(type='text' name=`lensType[${i}][subtitle]` value=`${tp.subtitle}` )
-                  textarea.description_type_lense(type='text' name=`lensType[${i}][desc]` value=`${tp.desc}`)= tp.desc
-              button.add_lense_type_btn +
+                  input.lenses_type(type='text' name=`lensType[0][subtitle]` value="" placeholder="name" )
+                  textarea.description_type_lense(type='text' name=`lensType[0][desc]` value='' placeholder="description")= tp.desc  
+                button.add_lense_type_btn +
+
             h3 thikness
             .thikness
-              each tk , i in lenses[0].thickness
+              if lenses
+                each tk , i in lenses[0].thickness
+                  .thik
+                    input.thikness_title(type='text' name=`thickness[${i}][subtitle]`  value=`${tk.subtitle}`)
+                    textarea.thikness_description(name=`thickness[${i}][desc]`  value=`${tk.desc}`)= tk.desc
+                    input.thikness_refraction(type='text' name=`thickness[${i}][refraction]`  value=`${tk.refraction || ''}` placeholder='refraction')
+                    input.thikness_preview(type='file' name=`thickness[${i}][photo]`  value=`${tk.photo}`)
+                    input.thickness_price(type='number' name=`thickness[${i}][price]`  value=`${tk.price}` placeholder='price')
+                button.add_thikness_btn +
+              else
                 .thik
-                  input.thikness_title(type='text' name=`thickness[${i}][subtitle]`  value=`${tk.subtitle}`)
-                  textarea.thikness_description(name=`thickness[${i}][desc]`  value=`${tk.desc}`)= tk.desc
-                  input.thikness_refraction(type='text' name=`thickness[${i}][refraction]`  value=`${tk.refraction || ''}` placeholder='refraction')
-                  input.thikness_preview(type='file' name=`thickness[${i}][photo]`  value=`${tk.photo}`)
-                  input.thickness_price(type='number' name=`thickness[${i}][price]`  value=`${tk.price}` placeholder='price')
-              button.add_thikness_btn +
+                    input.thikness_title(type='text' name=`thickness[0][subtitle]`  value=`` placeholder="name")
+                    textarea.thikness_description(name=`thickness[0][desc]`  value=``) description
+                    input.thikness_refraction(type='text' name=`thickness[0][refraction]`  value=`` placeholder='refraction')
+                    input.thikness_preview(type='file' name=`thickness[0][photo]`  value=`` )
+                    input.thickness_price(type='number' name=`thickness[0][price]`  value=`` placeholder='price')
+                button.add_thikness_btn +  
             h3 advanced lenes Type
             .ad_lense_type
-              each atp , i in lenses[0].advancedLensType
+              if lenses
+                each atp , i in lenses[0].advancedLensType
+                  .adType
+                    input.ad_type_title(type='text' name=`advancedLensType[${i}][subtitle]` value=`${atp.subtitle}` placeholder='title')
+                    textarea.ad_type_description(name=`advancedLensType[${i}][desc]` value=`${atp.desc}` placeholder='description') description
+                    input.ad_type_price(type='number' name=`advancedLensType[${i}][price]` value=`${atp.price}` min='0' placeholder='price')
+                button.add_advanced_btn +
+              else
                 .adType
-                  input.ad_type_title(type='text' name=`advancedLensType[${i}][subtitle]` value=`${atp.subtitle}` placeholder='title')
-                  textarea.ad_type_description(name=`advancedLensType[${i}][desc]` value=`${atp.desc}` placeholder='description')= atp.desc
-                  input.ad_type_price(type='number' name=`advancedLensType[${i}][price]` value=`${atp.price}` min='0' placeholder='price')
-              button.add_advanced_btn +
+                  input.ad_type_title(type='text' name=`advancedLensType[0][subtitle]` value=`` placeholder='title')
+                  textarea.ad_type_description(name=`advancedLensType[0][desc]` value=`` placeholder='description') description
+                  input.ad_type_price(type='number' name=`advancedLensType[0][price]` value=`` min='0' placeholder='price')
+                button.add_advanced_btn +  
             input.save_lenses_btn(type='submit' value='Save')
-      .add_product_setting.setting.setting--5.active
+      .add_product_setting.setting.setting--5
         h3 Add Product
         .glass_wrapper
           form#product-form.product--form
@@ -208,7 +231,7 @@ block content
           input#category-name.Categorie(type='text' placeholder='Categorie Name')
           input.category_add--btn(type='submit' value='Save')
       .banner_setting.setting.setting--8
-        h3 Add banners
+        h3 Add Announcs
         .old_announces
           each an in announces
             .announce

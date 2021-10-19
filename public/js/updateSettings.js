@@ -12,6 +12,8 @@ const selectedProd = document.querySelector('.selected_prod');
 
 export const updateSettings = async (data, type) => {
   try {
+    spinnerLoader();
+
     const url =
       type === 'password'
         ? '/api/users/updateMyPassword'
@@ -25,9 +27,11 @@ export const updateSettings = async (data, type) => {
 
     if (res.data.status === 'success') {
       showAlert('success', `${type.toUpperCase()} updated successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
@@ -35,6 +39,8 @@ export const updateSettings = async (data, type) => {
 
 export const addBanner = async (data) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'POST',
       url: 'api/banners/addbanner',
@@ -51,13 +57,17 @@ export const addBanner = async (data) => {
       
       `;
       bannerContainer.insertAdjacentHTML('beforeend', bannerHtml);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 export const removeBanner = async (bnrId) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'DELETE',
       url: `api/banners/delete-banner/${bnrId}`,
@@ -65,9 +75,11 @@ export const removeBanner = async (bnrId) => {
 
     if (res.status === 204) {
       showAlert('success', `banner Deleted successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
@@ -75,6 +87,8 @@ export const removeBanner = async (bnrId) => {
 
 export const removeProduct = async (prId) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'DELETE',
       url: `api/products/${prId}`,
@@ -82,9 +96,11 @@ export const removeProduct = async (prId) => {
 
     if (res.status === 204) {
       showAlert('success', `Product Deleted successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
@@ -92,6 +108,8 @@ export const removeProduct = async (prId) => {
 
 export const CompletOrder = async (oId) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'PATCH',
       url: `api/orders/${oId}`,
@@ -102,9 +120,11 @@ export const CompletOrder = async (oId) => {
 
     if (res.data.status === 'success') {
       showAlert('success', `complet successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
@@ -117,15 +137,19 @@ export const deleteOrder = async (oId) => {
 
     if (res.status === 204) {
       showAlert('success', `Order Deleted successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 // colections
 export const addNewcollection = async (data) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'POST',
       url: '/api/collections/addcollection',
@@ -141,14 +165,18 @@ export const addNewcollection = async (data) => {
       </div>
       `;
       collectionsContainer.insertAdjacentHTML('beforeend', html);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 export const deleteCollection = async (CId) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'DELETE',
       url: `api/collections/${CId}`,
@@ -156,15 +184,19 @@ export const deleteCollection = async (CId) => {
 
     if (res.status === 204) {
       showAlert('success', `Collection Deleted successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 // category
 export const addNewCategory = async (data) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'POST',
       url: '/api/categories/addcategory',
@@ -180,14 +212,18 @@ export const addNewCategory = async (data) => {
       </div>
       `;
       categorysContainer.insertAdjacentHTML('beforeend', html);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 export const deleteCategory = async (CId) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'DELETE',
       url: `api/categories/${CId}`,
@@ -195,15 +231,19 @@ export const deleteCategory = async (CId) => {
 
     if (res.status === 204) {
       showAlert('success', `category Deleted successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 // announce
 export const addNewAnnounce = async (data) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'POST',
       url: '/api/announces/addannounce',
@@ -225,14 +265,18 @@ export const addNewAnnounce = async (data) => {
 
       `;
       announcesContainer.insertAdjacentHTML('beforeend', html);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 export const deleteAnnounce = async (aId) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'DELETE',
       url: `api/announces/${aId}`,
@@ -240,9 +284,11 @@ export const deleteAnnounce = async (aId) => {
 
     if (res.status === 204) {
       showAlert('success', `category Deleted successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
@@ -250,6 +296,8 @@ export const deleteAnnounce = async (aId) => {
 
 export const deletePage = async (pId) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'DELETE',
       url: `api/pages/${pId}`,
@@ -257,14 +305,18 @@ export const deletePage = async (pId) => {
 
     if (res.status === 204) {
       showAlert('success', `page Deleted successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 export const addNewPage = async (name, pageBody) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'POST',
       url: '/api/pages/addpage',
@@ -286,14 +338,18 @@ export const addNewPage = async (name, pageBody) => {
 
       `;
       pagesContainer.insertAdjacentHTML('beforeend', html);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 export const updateLensesSet = async (data, id) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'PATCH',
       url: `/api/lenses/${id}`,
@@ -302,14 +358,18 @@ export const updateLensesSet = async (data, id) => {
 
     if (res.data.status === 'success') {
       showAlert('success', `lenses updated successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 export const addNewProduct = async (data) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'POST',
       url: '/api/products/',
@@ -319,14 +379,18 @@ export const addNewProduct = async (data) => {
     if (res.data.status === 'success') {
       showAlert('success', `Product added successfully!`);
       selectedProd.value = res.data.data.data.id;
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 export const addNewVert = async (data) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'POST',
       url: 'api/virtuals/addvirtualTry',
@@ -335,9 +399,11 @@ export const addNewVert = async (data) => {
 
     if (res.data.status === 'success') {
       showAlert('success', `try on added successfully!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
@@ -345,6 +411,8 @@ export const addNewVert = async (data) => {
 
 export const addNewFav = async (product, user) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'POST',
       url: '/api/favourite',
@@ -356,14 +424,18 @@ export const addNewFav = async (product, user) => {
 
     if (res.data.status === 'success') {
       showAlert('success', `product  added to favourite!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 export const deleteFav = async (fId) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'DELETE',
       url: `/api/favourite/deleteFa/${fId}`,
@@ -371,14 +443,18 @@ export const deleteFav = async (fId) => {
 
     if (res.status === 204) {
       showAlert('success', `product removed from favourite!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+    spinnerhidd();
   }
 };
 
 export const setNewPassword = async (data, token) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'PATCH',
       url: `/api/users/resetPassword/${token}`,
@@ -387,14 +463,18 @@ export const setNewPassword = async (data, token) => {
     if ((res.data.status = 'success')) {
       showAlert('success', `password is set!`);
       location.assign('/');
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', `${err.response.data.message} try again!`);
+    spinnerhidd();
   }
 };
 
 export const sendVerToken = async (email) => {
   try {
+    spinnerLoader();
+
     const res = await axios({
       method: 'POST',
       url: `/api/users/forgotPassword`,
@@ -402,8 +482,10 @@ export const sendVerToken = async (email) => {
     });
     if ((res.data.status = 'success')) {
       showAlert('success', `verefication  sent  to your email!`);
+      spinnerhidd();
     }
   } catch (err) {
     showAlert('error', `${err.response.data.message}!`);
+    spinnerhidd();
   }
 };

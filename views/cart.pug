@@ -22,7 +22,10 @@ block content
                 a.remove_from_cart.remove_item__cart(href='#' data-id=`${i.item.id}`)
                   span.material-icons
                     | remove_shopping_cart
-                img.product_cart_preview(src='./images/charles-deluvio-Pk3gCC49mCk-unsplash.jpg' alt='')
+                .previews_gwl
+                  img.product_cart_preview(src=`/img/products/${i.item.item.images[0]}` alt='')
+                  img.product_lns(src='/images/lenes.png' alt='')
+
                 .description_cart
                   h3.product_cart_title= `${ i.item.item.title} + 2xEyeglasses for ${ i.item.lenses.lensesType.type} ${ i.item.lenses.thicknessType.type || 'no'} thikness , and ${ i.item.lenses.advancedLensesType.type || '...'}`
                   p= `Pd: ${ i.item.lenses['total-spd'] || i.item.lenses['right-spd'] + i.item.lenses['left-spd'] }mm`

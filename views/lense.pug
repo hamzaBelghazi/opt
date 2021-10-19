@@ -499,7 +499,9 @@ block content
                 input#Standard(value=`${tk.subtitle.split(" ")[0]}` data-p=`${tk.price}` type='radio' name='thickness' required='')
                 .thik-desc
                   span.title-tk= tk.subtitle
-                  p.description-thickness=tk.refraction
+                  img.thik_lense_img( src=`/img/lenses/${tk.photo}` )
+                  .description-thickness
+                    small= 'Refraction index:' +' '+ tk.refraction
                     small.bold=tk.desc
                   p.price-tickness
                     span.price= tk.price + '$'         

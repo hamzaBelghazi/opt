@@ -11,10 +11,11 @@ block content
     .single_product_wrapper
       // product preview
       .single_product_preview
-        .try_on
-          a.try_on_btn.btn_try(href='#')
-            span.try_text Try Me On
-            span.material-icons  videocam 
+        if product.virualsTrys[0]
+          .try_on
+            a.try_on_btn.btn_try(href='#')
+              span.try_text Try Me On
+              span.material-icons  videocam 
         .all_product_preview
           each img in product.images
             img.small_product_img(src=`/img/products/${img}` alt=`${product.title}`)
@@ -23,17 +24,22 @@ block content
       .product_overview
         .product_title_wrapper
           span.product_title= product.title
-          p.product_like
-          if favourit
+          
+          if product.favourit
             - const u = []
             each fav in product.favourit
               if fav.user !== user.id
               -  u.push(fav.id)
-            if u.length > 0  
-              span.material-icons.heart.delete_fav(data-fav=`${u[0]}`) favorite   
-            else
+            p.product_like  
+              if u.length > 0  
+                span.material-icons.heart.delete_fav(data-fav=`${u[0]}`) favorite   
+              else
+                span.material-icons.heart.add_fav(data-user=`${user.id || ''}` data-product=`${product.id}`)  favorite_border 
+              span.likes_number= `(${product.likesQuantity || '0'})`
+          else
+            p.product_like
               span.material-icons.heart.add_fav(data-user=`${user.id || ''}` data-product=`${product.id}`)  favorite_border 
-            span.likes_number= `(${product.likesQuantity || '0'})`
+              span.likes_number (0)  
         .product_description_wrapper
           p.product_description= product.description
         .add_to_cart_wrapper
@@ -116,29 +122,29 @@ block content
             a.product_link(href=`/product/${rP.id}`)
               img.related_product_img(src=`/img/products/${rP.images[0]}` alt=`${rP.title}`)
               span.product_name=  rP.title 
-  
-  .content.try_on_container
-    #JeelizVTOWidget
-      canvas#JeelizVTOWidgetCanvas
-      .JeelizVTOWidgetControls.JeelizVTOWidgetControlsTop
-        // ADJUST BUTTON:
-        button#JeelizVTOWidgetAdjust
-          .buttonIcon
-            i.fas.fa-arrows-alt
-          |               Adjust
-        // RESIZE WIDGET BUTTON:
-        button#buttonResizeCanvas(onclick='test_resizeCanvas();')
-          .buttonIcon
-            i.fas.fa-sync-alt
-          |               Resize
-      // CHANGE MODEL BUTTONS:
-      #JeelizVTOWidgetChangeModelContainer.JeelizVTOWidgetControls
-        each obj , i in product.virualsTrys[0].virtualsObject
-          button(onclick=`JEELIZVTOWIDGET.load_modelStandalone('/img/tryon/${obj}')`)= 'Model' + i
-       
-      // BEGIN ADJUST NOTICE
-      #JeelizVTOWidgetAdjustNotice
-        | Move the glasses to adjust them. and scroll to resize them
-        button#JeelizVTOWidgetAdjustExit.JeelizVTOWidgetBottomButton
-          | Quit
-    a.close_try_on(href='#') x
+  if product.virualsTrys[0]
+    .content.try_on_container
+      #JeelizVTOWidget
+        canvas#JeelizVTOWidgetCanvas
+        .JeelizVTOWidgetControls.JeelizVTOWidgetControlsTop
+          // ADJUST BUTTON:
+          button#JeelizVTOWidgetAdjust
+            .buttonIcon
+              i.fas.fa-arrows-alt
+            |               Adjust
+          // RESIZE WIDGET BUTTON:
+          button#buttonResizeCanvas(onclick='test_resizeCanvas();')
+            .buttonIcon
+              i.fas.fa-sync-alt
+            |               Resize
+        // CHANGE MODEL BUTTONS:
+        #JeelizVTOWidgetChangeModelContainer.JeelizVTOWidgetControls
+          each obj , i in product.virualsTrys[0].virtualsObject
+            button(onclick=`JEELIZVTOWIDGET.load_modelStandalone('/img/tryon/${obj}')`)= 'Model' + i
+        
+        // BEGIN ADJUST NOTICE
+        #JeelizVTOWidgetAdjustNotice
+          | Move the glasses to adjust them. and scroll to resize them
+          button#JeelizVTOWidgetAdjustExit.JeelizVTOWidgetBottomButton
+            | Quit
+      a.close_try_on(href='#') x

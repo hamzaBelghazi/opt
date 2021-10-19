@@ -22,7 +22,8 @@ mixin navItem(link, text)
     span.material-icons.close--menu  close 
   ul.nav.main-nav
     if user
-      +navItem("/account" , "Account")
+      li 
+        a(href = '/account') #{__('account')} 
     else
       +navItem("/login" , "login/register")
     +navItem("/frames" , "Perscription Glasses")
@@ -81,8 +82,8 @@ header.header
         span.menu-text Menu
       span.material-icons.search  search 
     .search--bar
-      form.search--form
-        input#search_input.search_input(type='text' name='search' placeholder='Search...')
+      form.search--form(action='/search')
+        input#search_input.search_input(type='text' name='q' placeholder='Search...')
       span.material-icons.search--close  close 
     .logo
       a.logo_text(href='/') mhsOptics.
@@ -95,8 +96,8 @@ header.header
             span #{__('login')}
           a(href='/register') #{__('register')}
         - if (user)
-          a(href='/account') account
-          a.nav__el--logout(href='') logout
+          a(href='/account') #{__('account')}
+          a.nav__el--logout(href='') #{__('logout')}
 
       span.material-icons.mdl-badge.cart--toggle(data-badge=`${session.cart && session.cart.totalQuantity ? session.cart.totalQuantity :  '0'}`)
         | shopping_cart

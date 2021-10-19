@@ -7,6 +7,7 @@ const stripe = Stripe(
 
 export const orderGlasses = async () => {
   try {
+    spinnerLoader();
     const hadi = setTimeout(() => {
       console.log('hamza');
     }, 4000);
@@ -19,7 +20,7 @@ export const orderGlasses = async () => {
   } catch (err) {
     showAlert(
       'error',
-      'your not logged in please signin Or rejister an acount'
+      'your not logged in please signin Or rejister an account'
     );
     setTimeout(() => {
       location.assign('/login');

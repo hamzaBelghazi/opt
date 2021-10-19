@@ -32,11 +32,9 @@ const productSchema = mongoose.Schema(
     colors: [String],
     productGender: {
       type: String,
-      enum: ['women', 'men', 'kid'],
     },
     glassesType: {
       type: String,
-      enum: ['sunglasses', 'prescription'],
     },
     shape: {
       type: String,
@@ -69,6 +67,13 @@ const productSchema = mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+productSchema.index({
+  glassesType: 'text',
+  productGender: 'text',
+  title: 'text',
+  description: 'text',
+  colors: 'text',
+});
 
 productSchema.virtual('virualsTrys', {
   ref: 'VirtualTry',
@@ -87,5 +92,5 @@ productSchema.pre(/^find/, function (next) {
   next();
 });
 const Product = mongoose.model('Product', productSchema);
-
+// Product.createIndexes();
 module.exports = Product;

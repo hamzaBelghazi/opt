@@ -14,6 +14,9 @@ router.get('/login', viewsController.getLoginForm);
 router.get('/page/:id', viewsController.getPage);
 router.get('/frames', viewsController.getFrames);
 router.get('/sunglasses', viewsController.getSunGlasees);
+router.get('/collections/:col', viewsController.getBycollection);
+router.get('/categories/:cat', viewsController.getBycategory);
+
 router.get(
   '/register',
 

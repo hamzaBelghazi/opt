@@ -14,10 +14,6 @@
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
 }
 
-@font-face {
-  font-family: "ApercuR";
-  src: url("./font/Apercu Pro Regular.otf");
-}
 * {
   margin: 0;
   padding: 0;
@@ -2026,6 +2022,9 @@ dd.variation-Parametre {
   margin-left: 15px;
   word-wrap: break-word;
 }
+.thik-desc img {
+  width: 60px;
+}
 
 .thik-desc .title-tk {
   font-size: 1.2rem;
@@ -2033,11 +2032,16 @@ dd.variation-Parametre {
   color: #304565;
 }
 
-.description-thickness .bold,
+.description-thickness {
+  display: flex;
+  flex-direction: column;
+}
+
 .description-adv {
   color: gray;
   font-size: 16px;
   opacity: 0.8;
+  margin: 0px 10px;
 }
 
 .price-tickness {

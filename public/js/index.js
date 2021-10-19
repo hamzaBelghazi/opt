@@ -30,7 +30,7 @@ import {
   setNewPassword,
   sendVerToken,
 } from './updateSettings';
-import { orderGlasses } from './stripe';
+// import { orderGlasses } from './stripe';
 
 import { filterProd, loadeMoreProd } from './products';
 
@@ -365,7 +365,7 @@ const addTypeToFormHelper = function (formdata, type) {
 };
 const addFileToFormHelper = function (formdata, type) {
   type.forEach((t) => {
-    console.log(t.name, t.files[0]);
+
     formdata.append(t.name, t.files[0]);
   });
 };
@@ -406,7 +406,7 @@ if (lensesDataForm) {
 }
 
 const prodeToFormHelper = function (formdata, t) {
-  console.log(t.name);
+  if (!t.value) return;
   formdata.append(t.name, t.value);
 };
 

@@ -9,6 +9,8 @@ export const register = async (
   password,
   passwordConfirm
 ) => {
+  spinnerLoader();
+
   try {
     const res = await axios({
       method: 'POST',
@@ -25,10 +27,13 @@ export const register = async (
     if (res.data.status === 'success') {
       showAlert('success', 'Your Account created successfully!');
       window.setTimeout(() => {
+        spinnerhidd();
+
         location.assign('/');
       }, 1500);
     }
   } catch (err) {
-    showAlert('error', 'err.response.data.message');
+    showAlert('error', `${err.response.data.message}`);
+    spinnerhidd();
   }
 };

@@ -30,17 +30,18 @@ block content
       h2.section__description discover
       h3.section__header Latest Mhsoptics Glasses.
     .categories
-      each cat in categories
-        a.cat-link(href='#')
-          .cat-cart
-            img(src=`/img/category/${cat.categoryImage}` alt=`${cat.name}`)
-            .cat--title
-              span.cat--subtitle= cat.name
-            .cat--title--outer
-              span.cat--subtitle= cat.name
-            .cat--info
-              span.cat--subtitle discover
-    
+      if categories
+        each cat in categories
+          a.cat-link(href=`/categories/${cat.id}`)
+            .cat-cart
+              img(src=`/img/category/${cat.categoryImage}` alt=`${cat.name}`)
+              .cat--title
+                span.cat--subtitle= cat.name
+              .cat--title--outer
+                span.cat--subtitle= cat.name
+              .cat--info
+                span.cat--subtitle discover
+      
   section.selected--item.section
     .section__title
       h2.section__description Discover
@@ -62,13 +63,14 @@ block content
       h2.section__description Discover
       h3.section__header Our Collection
     .collections_wrapper.slider2
-      each col in collections
-        .collection.slide2
-          a(href=`/collections/${col.name}`)
-            img.collection_preview(src=`/img/collection/${col.collectionImage}` alt=`${col.name}`)
-            .collection_desc
-              span.collection_title=col.name
-              span.collection_over=col.desc           
+      if collections
+        each col in collections
+          .collection.slide2
+            a(href=`/collections/${col.id}`)
+              img.collection_preview(src=`/img/collection/${col.collectionImage}` alt=`${col.name}`)
+              .collection_desc
+                span.collection_title=col.name
+                span.collection_over=col.desc           
       span.material-icons.slider__btn.slider__btn--left2
         | navigate_before
       span.material-icons.slider__btn.slider__btn--right2

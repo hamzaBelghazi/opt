@@ -962,7 +962,6 @@ if (prodImgPrev) {
     if (!fileInput) return;
     fileInput.addEventListener('change', function (e) {
       const label = e.target.closest('label');
-      console.log(label);
       const curFiles = e.target.files;
       for (const file of curFiles) {
         if (label.childNodes.length === 2) {

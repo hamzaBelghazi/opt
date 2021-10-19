@@ -24,9 +24,9 @@ exports.pages = async (req, res, next) => {
 };
 
 exports.getSearch = catchAsync(async (req, res, next) => {
-  const searchQuery = req.body;
-  const products = await Product.find().limit(9);
-  res.status(200).render('overview', {
+  const { q } = req.query;
+  const products = await Product.find({ $text: { $search: q } });
+  res.status(200).render('products', {
     title: 'search',
     products,
   });
@@ -72,10 +72,34 @@ exports.getSunGlasees = catchAsync(async (req, res, next) => {
     return next(new AppError('There is no tour with that name.', 404));
   }
   res.status(200).render('products', {
+    title: 'collection..',
+    products,
+  });
+});
+exports.getBycollection = catchAsync(async (req, res, next) => {
+  const { cat } = req.params;
+  const products = await Product.find({ categories: cat }).limit(9);
+  if (!products) {
+    return next(new AppError('There is no tour with that name.', 404));
+  }
+  res.status(200).render('products', {
+    title: 'categorie...',
+    products,
+  });
+});
+
+exports.getBycategory = catchAsync(async (req, res, next) => {
+  const { col } = req.params;
+  const products = await Product.find({ collections: col }).limit(9);
+  if (!products) {
+    return next(new AppError('There is no tour with that name.', 404));
+  }
+  res.status(200).render('products', {
     title: 'sunglasses',
     products,
   });
 });
+
 exports.getProducts = catchAsync(async (req, res, next) => {
   const queryObj = req.query;
   const products = await Product.find(queryObj).limit(9);
@@ -107,7 +131,7 @@ exports.getLense = catchAsync(async (req, res, next) => {
   if (!product) {
     return next(new AppError('this page not found!', 404));
   }
-  console.log(lens);
+
   res.status(200).render('lense', {
     title: `lenses for ${product.title}`,
     lens,
@@ -153,7 +177,6 @@ exports.getAccount = catchAsync(async (req, res) => {
     'product'
   );
 
-  console.log(favorite);
   res.status(200).render('account', {
     title: 'Your account',
     orders,
