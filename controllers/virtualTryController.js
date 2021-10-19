@@ -1,7 +1,7 @@
 const multer = require('multer');
-const VirtualTry = require('../models/virtualTryModel');
-const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
+const VirtualTry = require('../models/VirtualTryModel');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
 
 const storage = multer.diskStorage({
