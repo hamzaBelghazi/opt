@@ -10,7 +10,7 @@ function test_resizeCanvas() {
 }
 
 // entry point:
-function main() {
+function mirrorTryOn() {
   JEELIZVTOWIDGET.start({
     searchImageMask: 'https://appstatic.jeeliz.com/jeewidget/images/target.png',
     searchImageColor: 0xeeeeee,

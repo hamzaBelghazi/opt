@@ -1,0 +1,400 @@
+.jumbotrone {
+  height: 370px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid $text--white--color;
+  img {
+    width: 50%;
+    max-height: 100%;
+  }
+  @media screen {
+    height: fit-content;
+  }
+
+  .big__title {
+    width: 50%;
+    text-align: center;
+    color: $text--gray--color;
+    font-size: 64px;
+    user-select: none;
+  }
+  @media screen and(max-width:720px) {
+    img {
+      width: 100%;
+    }
+    .big__title {
+      width: 100%;
+    }
+  }
+  .navigation {
+    width: 100%;
+    border-bottom: 1px solid $text--white--color;
+    display: flex;
+    padding: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    a {
+      color: $primary--color;
+    }
+    .siparetor {
+      margin: 0px 8px;
+    }
+  }
+}
+
+.products__section {
+  .custom__action__container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    border-bottom: 1px solid $text--white--color;
+    padding: 16px 0px;
+    .filter__button {
+      cursor: pointer;
+      font-size: 18px;
+      .filter__button--icon {
+        margin-left: 4px;
+      }
+    }
+    .results {
+      font-weight: normal;
+      color: $text--gray--color;
+      .results__count {
+        margin-right: 4px;
+      }
+    }
+  }
+  .products__container {
+    display: flex;
+    .filter__toggle {
+      width: 480px;
+      transition: max-width 0.3s ease-in;
+      margin-right: 16px;
+      max-width: 0%;
+      overflow: hidden;
+      &.show_filter {
+        max-width: 480px;
+        min-width: 260px;
+      }
+
+      .filter {
+        border-bottom: 1px solid $text--white--color;
+      }
+      .filter_title {
+        font-weight: bold;
+        padding: 20px 0px;
+        font-weight: normal;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        .add_icon {
+          font-size: 18px;
+        }
+      }
+      .choices {
+        max-height: 0;
+        visibility: hidden;
+        overflow: hidden;
+        transition: all 0.8s linear;
+        &.toggled {
+          visibility: visible;
+          max-height: 999px;
+        }
+        .checkbox_wraper {
+          margin: 8px;
+          @supports (-webkit-appearance: none) or (-moz-appearance: none) {
+            input[type='checkbox'],
+            input[type='radio'] {
+              --active: #00aef9;
+              --active-inner: #fff;
+              --focus: 2px rgba(39, 94, 254, 0.3);
+              --border: #1f1f20;
+              --border-hover: #00aef9;
+              --background: #fff;
+              --disabled: #f6f8ff;
+              --disabled-inner: #e1e6f9;
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              height: 21px;
+              outline: none;
+              display: inline-block;
+              vertical-align: top;
+              position: relative;
+              margin: 0;
+              cursor: pointer;
+              border: 1px solid var(--bc, var(--border));
+              background: var(--b, var(--background));
+              transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+              &:after {
+                content: '';
+                display: block;
+                left: 0;
+                top: 0;
+                position: absolute;
+                transition: transform var(--d-t, 0.3s) var(--d-t-e, ease),
+                  opacity var(--d-o, 0.2s);
+              }
+              &:checked {
+                --b: var(--active);
+                --bc: var(--active);
+                --d-o: 0.3s;
+                --d-t: 0.6s;
+                --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
+              }
+              &:disabled {
+                --b: var(--disabled);
+                cursor: not-allowed;
+                opacity: 0.9;
+                &:checked {
+                  --b: var(--disabled-inner);
+                  --bc: var(--border);
+                }
+                & + label {
+                  cursor: not-allowed;
+                }
+              }
+              &:hover {
+                &:not(:checked) {
+                  &:not(:disabled) {
+                    --bc: var(--border-hover);
+                  }
+                }
+              }
+              &:focus {
+                box-shadow: 0 0 0 var(--focus);
+              }
+              &:not(.switch) {
+                width: 21px;
+                &:after {
+                  opacity: var(--o, 0);
+                }
+                &:checked {
+                  --o: 1;
+                }
+              }
+              & + label {
+                font-size: 16px;
+                line-height: 21px;
+                display: inline-block;
+                vertical-align: top;
+                cursor: pointer;
+                margin-left: 4px;
+                color: $text--gray--color;
+              }
+            }
+            input[type='checkbox'] {
+              &:not(.switch) {
+                border-radius: 2px;
+                &:after {
+                  width: 5px;
+                  height: 9px;
+                  border: 2px solid var(--active-inner);
+                  border-top: 0;
+                  border-left: 0;
+                  left: 7px;
+                  top: 4px;
+                  transform: rotate(var(--r, 20deg));
+                }
+                &:checked {
+                  --r: 43deg;
+                }
+              }
+              &.switch {
+                width: 38px;
+                border-radius: 11px;
+                &:after {
+                  left: 2px;
+                  top: 2px;
+                  border-radius: 50%;
+                  width: 15px;
+                  height: 15px;
+                  background: var(--ab, var(--border));
+                  transform: translateX(var(--x, 0));
+                }
+                &:checked {
+                  --ab: var(--active-inner);
+                  --x: 17px;
+                }
+                &:disabled {
+                  &:not(:checked) {
+                    &:after {
+                      opacity: 0.6;
+                    }
+                  }
+                }
+              }
+            }
+            input[type='radio'] {
+              border-radius: 50%;
+              &:after {
+                width: 19px;
+                height: 19px;
+                border-radius: 50%;
+                background: var(--active-inner);
+                opacity: 0;
+                transform: scale(var(--s, 0.7));
+              }
+              &:checked {
+                --s: 0.5;
+              }
+            }
+          }
+        }
+      }
+    }
+    .products_area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        .product {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border-bottom: 1px solid $text--white--color;
+          padding: 16px 0px;
+          .product__link {
+            color: $text--gray--color;
+            font-size: 18px;
+            margin-top: 8px;
+            img {
+              width: 100%;
+              height: 50%;
+              object-fit: contain;
+              margin: 8px 0px;
+            }
+          }
+          .fav__button {
+            color: $text--color;
+            span {
+              font-size: 28px;
+              &:hover {
+                color: $primary--color;
+              }
+            }
+          }
+          .product__price {
+            margin-top: 8px;
+            font-size: 20px;
+          }
+          .product__info {
+            font-weight: normal;
+            color: $text--gray--color;
+          }
+        }
+      }
+      .pagination ul {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        background: #fff;
+        padding: 8px;
+        border-radius: 50px;
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+      }
+      .pagination ul li {
+        list-style: none;
+        line-height: 45px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.3s ease;
+        a {
+          color: $primary--color;
+          display: block;
+        }
+      }
+      .pagination ul li.numb {
+        list-style: none;
+        height: 45px;
+        width: 45px;
+        margin: 0 3px;
+        line-height: 45px;
+        border-radius: 50%;
+      }
+      .pagination ul li.numb.first {
+        margin: 0px 3px 0 -5px;
+      }
+      .pagination ul li.numb.last {
+        margin: 0px -5px 0 3px;
+      }
+      .pagination ul li.dots {
+        font-size: 22px;
+        cursor: default;
+      }
+      .pagination ul li.btn {
+        padding: 0 20px;
+        border-radius: 50px;
+      }
+      .pagination li.active,
+      .pagination ul li.numb:hover,
+      .pagination ul li:first-child:hover,
+      .pagination ul li:last-child:hover {
+        a {
+          color: white;
+        }
+        background: $primary--color;
+      }
+    }
+  }
+}
+
+.search__banner {
+  width: 100;
+  height: 70vh;
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  color: white;
+  .search {
+    width: 100%;
+    padding: 16px 0px;
+    display: flex;
+    border-bottom: 2px solid;
+    input[type='search'] {
+      width: 90%;
+      height: 100%;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      font-size: 32px;
+      color: white;
+      margin-left: -1px;
+      margin-right: -1px;
+    }
+    @media screen and(max-width:720px) {
+      input[type='search'] {
+        font-size: 24px;
+      }
+    }
+    @media screen and(max-width:480px) {
+      input[type='search'] {
+        font-size: 18px;
+      }
+    }
+    .search_btn {
+      border: none;
+      background-color: transparent;
+      color: white;
+      height: 100%;
+      span {
+        font-size: 40px;
+      }
+      cursor: pointer;
+      width: calc(100% - 90%);
+      transition: transform 0.3s ease-in-out;
+      &:hover {
+        transform: translateX(4px);
+      }
+    }
+  }
+}

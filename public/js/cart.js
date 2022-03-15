@@ -8,7 +8,7 @@ export const deleteItemFromCart = async (itemId) => {
   spinnerLoader();
   try {
     const res = await axios({
-      method: 'POST',
+      method: 'DELETE',
       url: `/api/cart/${itemId}`,
     });
     if ((res.data.status = 'success')) location.reload(true);
@@ -34,13 +34,18 @@ export const incsDecQuantity = async (itemId, quntity) => {
   }
 };
 
-export const addGlassesWithLenses = async (lensesOpt, itemId) => {
+export const addGlassesWithLenses = async (
+  lensesParameters,
+  lensesOpt,
+  itemId
+) => {
   spinnerLoader();
   try {
     const res = await axios({
       method: 'POST',
       url: `/api/cart/item/addglassesWithlenses/${itemId}`,
       data: {
+        lensesParameters,
         lensesOpt,
       },
     });
@@ -58,7 +63,6 @@ export const addGlassesWithLenses = async (lensesOpt, itemId) => {
 
 export const addGlassTocart = async (itemId) => {
   spinnerLoader();
-
   try {
     const res = await axios({
       method: 'GET',
@@ -66,6 +70,7 @@ export const addGlassTocart = async (itemId) => {
     });
 
     if (res.data.status === 'success') {
+      console.log(res.data);
       showAlert('success', 'glasses was added to your cart');
       location.reload();
       spinnerhidd();

@@ -1,0 +1,414 @@
+<!-- section identifer -->
+
+<div class="jumbotrone">
+  <div class="navigation">
+    <a href="/"><%= __('home') %></a>
+    <span class="siparetor">/</span>
+    <div class="subtitle">
+      <%= `${title === 'sunglasses..' ? 'Sunglasses' : 'Optical' }` %>
+    </div>
+  </div>
+  <img
+    src="<%= `${title === 'sunglasses..' ? '/assets/sunglasses.svg' : '/assets/identifletters.jpg' }` %>"
+    alt=""
+  />
+  <h1 class="big__title">
+    <%= `${title === 'sunglasses..' ? 'Sunglasses' : 'Optical' }` %>
+  </h1>
+</div>
+<section class="products__section section">
+  <div class="custom__action__container">
+    <div class="filter__button">
+      <span class="filter__button--text"><%= __('Filters') %></span>
+      <span class="filter__button--icon">
+        <svg
+          width="24"
+          height="13"
+          viewBox="0 0 24 13"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line
+            x1="1"
+            y1="3"
+            x2="23"
+            y2="3"
+            stroke="#525252"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <line
+            x1="1"
+            y1="10"
+            x2="23"
+            y2="10"
+            stroke="#525252"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <line
+            x1="6"
+            y1="1"
+            x2="6"
+            y2="5"
+            stroke="#525252"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <line
+            x1="19"
+            y1="8"
+            x2="19"
+            y2="12"
+            stroke="#525252"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </span>
+    </div>
+    <div class="results">
+      <span class="results__count"> <%= resultsCount %> </span><%= __('Results')
+      %>
+    </div>
+  </div>
+  <div class="products__container">
+    <div class="filter__toggle show_filter">
+      <div class="filter_container">
+        <div class="filter_by_gender filter">
+          <div class="filter_title">
+            <span class="title"><%= __('gender') %></span>
+            <span class="material-icons add_icon"> add </span>
+          </div>
+          <div class="choices">
+            <div class="checkbox_wraper">
+              <input
+                id="men"
+                type="checkbox"
+                name="productGender"
+                value="men"
+              /><label for="men"><%= __('Men') %></label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="women"
+                type="checkbox"
+                name="productGender"
+                value="women"
+              /><label for="women"><%= __('Women') %></label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="kids"
+                type="checkbox"
+                name="productGender"
+                value="kids"
+              /><label for="kids"><%= __('Kids') %></label>
+            </div>
+          </div>
+        </div>
+        <div class="filter_by_frame_type filter">
+          <div class="filter_title">
+            <span class="title"><%= __('Frame_type') %></span>
+            <span class="material-icons add_icon"> add </span>
+          </div>
+          <div class="choices">
+            <div class="checkbox_wraper">
+              <input
+                id="fullrim"
+                type="checkbox"
+                name="frameType"
+                value="fullrim"
+              /><label for="fullrim"><%= __('fullrim') %></label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="halfrim"
+                type="checkbox"
+                name="frameType"
+                value="halfrim"
+              /><label for="halfrim"><%= __('halfrim') %></label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="rimless"
+                type="checkbox"
+                name="frameType"
+                value="rimless"
+              /><label for="rimless"><%= __('rimless') %></label>
+            </div>
+          </div>
+        </div>
+        <div class="filter_by_shape filter">
+          <div class="filter_title">
+            <span class="title"><%= __('Shapes') %></span>
+            <span class="material-icons add_icon"> add </span>
+          </div>
+          <div class="choices">
+            <div class="checkbox_wraper">
+              <input
+                id="rectangular"
+                type="checkbox"
+                name="shape"
+                value="rectangular"
+              /><label for="rectangular"><%= __('rectangular') %></label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="pilot"
+                type="checkbox"
+                name="shape"
+                value="pilot"
+              /><label for="pilot"><%= __('pilot') %></label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="round"
+                type="checkbox"
+                name="shape"
+                value="round"
+              /><label for="round"><%= __('round') %></label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="square"
+                type="checkbox"
+                name="shape"
+                value="square"
+              /><label for="square"><%= __('square') %></label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="browline"
+                type="checkbox"
+                name="shape"
+                value="browline"
+              /><label for="browline"><%= __('browline') %></label>
+            </div>
+          </div>
+        </div>
+        <div class="filter_by_frames_color filter">
+          <div class="filter_title">
+            <span class="title"><%= __('Frame_colour') %></span>
+            <span class="material-icons add_icon"> add </span>
+          </div>
+          <div class="choices">
+            <div class="checkbox_wraper">
+              <input
+                id="black"
+                type="checkbox"
+                name="colors"
+                value="black"
+              /><label for="black">black</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="blue"
+                type="checkbox"
+                name="colors"
+                value="blue"
+              /><label for="blue">blue</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="brown"
+                type="checkbox"
+                name="colors"
+                value="brown"
+              /><label for="brown">brown</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="gold"
+                type="checkbox"
+                name="colors"
+                value="gold"
+              /><label for="gold">gold</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="green"
+                type="checkbox"
+                name="colors"
+                value="green"
+              /><label for="green">green</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="grey"
+                type="checkbox"
+                name="colors"
+                value="grey"
+              /><label for="grey">grey</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="orange"
+                type="checkbox"
+                name="colors"
+                value="orange"
+              /><label for="orange">orange</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="pink"
+                type="checkbox"
+                name="colors"
+                value="pink"
+              /><label for="pink">pink</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="purple"
+                type="checkbox"
+                name="colors"
+                value="purple"
+              /><label for="purple">purple</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input id="red" type="checkbox" name="colors" value="red" /><label
+                for="red"
+                >red</label
+              >
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="silver"
+                type="checkbox"
+                name="colors"
+                value="silver"
+              /><label for="silver">silver</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="transparent"
+                type="checkbox"
+                name="colors"
+                value="transparent"
+              /><label for="transparent">transparent</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="white"
+                type="checkbox"
+                name="colors"
+                value="white"
+              /><label for="white">white</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="yellow"
+                type="checkbox"
+                name="colors"
+                value="yellow"
+              /><label for="yellow">yellow</label>
+            </div>
+          </div>
+        </div>
+        <div class="filter_by_frame_material filter">
+          <div class="filter_title">
+            <span class="title"><%= __('Frame_material') %> </span>
+            <span class="material-icons add_icon"> add </span>
+          </div>
+          <div class="choices">
+            <div class="checkbox_wraper">
+              <input
+                id="metal"
+                type="checkbox"
+                name="frameMatirial"
+                value="metal"
+              /><label for="metal">metal</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="plastic"
+                type="checkbox"
+                name="frameMatirial"
+                value="plastic"
+              /><label for="plastic">plastic</label>
+            </div>
+            <div class="checkbox_wraper">
+              <input
+                id="titanium"
+                type="checkbox"
+                name="frameMatirial"
+                value="titanium"
+              /><label for="titanium">titanium</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="products_area">
+      <div class="products">
+        <% products.map((product)=> { %>
+        <div class="product">
+          <% if(!locals.user ) { %>
+          <a class="fav__button" href="/login">
+            <span class="material-icons"> favorite </span>
+          </a>
+          <% } else { %> <% if(product.favourit.length > 0)
+          {product.favourit.map( (f) => { if (JSON.stringify(f.user) ===
+          JSON.stringify(user.id) ){ %>
+          <a class="fav__button delete_fav" href="#" data-fav="<%= f.id %>">
+            <span class="material-icons" style="color: #47c5fb">
+              favorite
+            </span>
+          </a>
+          <% }else { %>
+          <a class="fav__button delete_fav" href="#" data-fav="<%= f.id %>">
+            <span class="material-icons" style="color: #47c5fb">
+              favorite
+            </span>
+          </a>
+          <% }}) } else{ %>
+          <a
+            class="fav__button add_fav"
+            href="#"
+            data-user="<%= user.id %>"
+            data-product="<%= product.id %>"
+          >
+            <span class="material-icons"> favorite </span>
+          </a>
+          <% } %> <% } %>
+
+          <a href="/product/<%= product.id %>" class="product__link">
+            <img
+              class="product__img"
+              src="/img/products/<%= product.images[0] %>"
+              alt=""
+            />
+          </a>
+          <a href="/product/<%= product.id %>" class="product__link"
+            ><%= product.title %></a
+          >
+          <p class="product__price">
+            <%= product.price %> <span class="currency">$</span>
+          </p>
+          <p class="product__info"><%= product.colors %></p>
+        </div>
+        <% }) %>
+      </div>
+      <div class="pagination">
+        <ul></ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="search__banner section">
+  <h2><%= __('search_text_grand') %></h2>
+  <form class="search" action="/search">
+    <input
+      type="search"
+      class="search_input"
+      placeholder="<%= __('SEARCH_FOR_ANYTHING') %>"
+      name="q"
+      id="search"
+    />
+    <button type="button" class="search_btn">
+      <span class="material-icons"> trending_flat </span>
+    </button>
+  </form>
+</section>
+
+<script src="/js/pagination.js"></script>

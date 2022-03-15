@@ -1,0 +1,228 @@
+.user-panel {
+  display: flex;
+  background-color: rgb(244, 244, 244);
+  position: relative;
+  min-height: 50vh;
+}
+.panel_navigation {
+  background-color: $text--whiter--color;
+  height: fit-content;
+  position: sticky;
+  top: 5%;
+  width: 30%;
+
+  .nav_panel_title {
+    color: $text--color;
+    padding: 16px;
+  }
+  .nav_panel {
+    width: 100%;
+    li {
+      width: 100%;
+      a {
+        width: 100%;
+        padding: 16px;
+        text-decoration: none;
+        color: $text--gray--color;
+        display: block;
+        border-top: 1px solid $text--white--color;
+        border-left: 3px solid white;
+        &:hover,
+        &.active {
+          border-left: 3px solid $primary--color;
+          color: $primary--color;
+        }
+      }
+    }
+  }
+}
+.setting_overview {
+  width: 100%;
+  .orders,
+  .favourite_products {
+    padding: 0px 24px;
+    h1 {
+      margin-bottom: 16px;
+    }
+  }
+  .toggle_side_menu {
+    color: $primary--color;
+    margin-left: 16px;
+    font-size: 38px;
+    cursor: pointer;
+    border-radius: 4px;
+    visibility: hidden;
+    background-color: $text--whiter--color;
+    @media screen and(max-width:840px) {
+      margin-left: 0;
+      visibility: visible;
+    }
+  }
+}
+.account_details {
+  width: 100%;
+  form {
+    .container {
+      margin-top: 0;
+      padding: 0px 24px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      h1,
+      hr,
+      .cuurent {
+        grid-column: span 2;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      input {
+        padding: 8px;
+        font-size: 16px;
+        color: $text--gray--color;
+      }
+      select {
+        padding: 8px;
+        font-size: 16px;
+        width: 100%;
+        margin-top: 8px;
+      }
+      button {
+        background-color: $background--color;
+        border: none;
+        color: $text--whiter--color;
+      }
+    }
+  }
+  .change_password_form {
+    margin-top: 16px;
+  }
+}
+
+// orders
+
+@import '_tables';
+
+.pending_order {
+  color: red;
+}
+.completed_order {
+  color: green;
+}
+.favourite_products {
+  ul {
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 8px;
+      background-color: $text--whiter--color;
+      margin-top: 8px;
+      border-radius: 8px;
+      border-left: 4px solid $primary--color;
+      .product_info {
+        display: flex;
+        a.product_link {
+          img {
+            width: 170px;
+            height: 170px;
+            object-fit: contain;
+          }
+        }
+        .prod_desc {
+          a {
+            color: $text--color;
+          }
+          margin-left: 8px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+      .controls {
+        .add_to_cart,
+        .delete--prode {
+          padding: 8px 16px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+.setting {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  &.active {
+    max-height: 9999px;
+    opacity: 1;
+  }
+}
+
+@media screen and(max-width : 360px) {
+  .account_details {
+    form {
+      .container {
+        margin-top: 0;
+        padding: 0px;
+      }
+    }
+  }
+  .setting_overview {
+    .orders,
+    .favourite_products {
+      padding: 0px 4px;
+    }
+  }
+  .favourite_products {
+    ul {
+      li {
+        justify-content: center;
+        padding: 16px 0px;
+        .product_info {
+          a.product_link {
+            img {
+              width: 70px;
+              height: 70px;
+            }
+          }
+          .prod_desc {
+            a {
+              color: $text--color;
+            }
+            margin-left: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and(max-width : 480px) {
+  .account_details {
+    form {
+      .container {
+        div {
+          grid-column: span 2;
+        }
+        button {
+          grid-column: span 2;
+        }
+      }
+    }
+  }
+}
+@media screen and(max-width : 840px) {
+  .panel_navigation {
+    max-width: 0;
+    overflow: hidden;
+    &.active {
+      max-width: 360px;
+      min-width: 160px;
+    }
+  }
+}

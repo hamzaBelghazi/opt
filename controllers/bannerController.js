@@ -27,10 +27,10 @@ exports.resizeBannerImages = catchAsync(async (req, res, next) => {
 
   req.body.slide = `banner-${Math.trunc(
     Math.random() * 12222222
-  )}-${Date.now()}.jpeg`;
+  )}-${Date.now()}.png`;
   await sharp(req.file.buffer)
-    .toFormat('jpeg')
-    .jpeg({ quality: 100 })
+    .toFormat('png')
+    .png({ quality: 100 })
     .toFile(`public/img/banners/${req.body.slide}`);
 
   next();

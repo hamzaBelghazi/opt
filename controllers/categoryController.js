@@ -27,10 +27,10 @@ exports.resizeCategoryImages = catchAsync(async (req, res, next) => {
 
   req.body.categoryImage = `category-${Math.trunc(
     Math.random() * 12222222
-  )}-${Date.now()}.jpeg`;
+  )}-${Date.now()}.png`;
   await sharp(req.file.buffer)
-    .toFormat('jpeg')
-    .jpeg({ quality: 100 })
+    .toFormat('png')
+    .png({ quality: 100 })
     .toFile(`public/img/category/${req.body.categoryImage}`);
   next();
 });

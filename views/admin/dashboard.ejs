@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="/css/admin/dashboard.css" />
+    <title>mhsOptics / dashboard</title>
+  </head>
+  <body>
+    <main>
+      <div class="navigation">
+        <a href="/admin" class="logo"> mhsOptics </a>
+        <ul class="main_list">
+          <li>
+            <a href="/admin" class="active">
+              <span class="material-icons"> home </span>
+              <span class="text">Dashboard </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-banners-setting">
+              <span class="material-icons"> ad_units </span>
+              <span class="text">Banners </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-users-setting" >
+              <span class="material-icons"> people </span>
+              <span class="text"> Users </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-orders-setting">
+              <span class="material-icons"> bookmark_border </span>
+              <span class="text">Orders </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-products-setting">
+              <span class="material-icons"> production_quantity_limits </span>
+              <span class="text">Products </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-lenses-setting">
+              <span class="material-icons"> lens </span>
+              <span class="text">Lens</span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-categories-setting">
+              <span class="material-icons"> category </span>
+              <span class="text">categoris </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-collections-setting">
+              <span class="material-icons"> collections </span>
+              <span class="text">Collections </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-announcments-setting">
+              <span class="material-icons"> campaign </span>
+              <span class="text">Announcment </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-pages-setting">
+              <span class="material-icons"> article </span>
+              <span class="text">Pages</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="container">
+        <header class="dashboard__header">
+          <a class="toggle_nav">
+            <svg viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            </svg>
+          </a>
+          <div class="nav">Hicham sabagh</div>
+        </header>
+        <section class="main__section">
+          <div class="actions__container">
+            <div class="section__title">
+              <h2 class="title">Dashboard</h2>
+            </div>
+            <div class="cards__container">
+              <div class="card users_count">
+                <span class="card__title">Users</span>
+                <span class="card__icon">
+                  <svg fill="#00aef9" viewBox="0 0 20 20">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                  </svg>
+                </span>
+                <sapn class="card__number">
+
+               <%= usersCount %>
+
+                </span>
+              </div>
+              <div class="card">
+                <span class="card__title">Products</span>
+                <span class="card__icon">
+                  <svg  viewBox="0 0 20 20">
+                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                  </svg>
+                </span>
+                <sapn class="card__number">
+                  <%= productsCount %> 
+                </span>
+              </div>
+              <div class="card">
+                <span class="card__title">Orders</span>
+                <span class="card__icon">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <sapn class="card__number">
+               <%= ordersCount %> 
+                </span>
+              </div>
+              
+            </div>
+          </div>
+        </section>
+        <footer class="footer">
+          <p class="copyright">
+            <span>&copy;</span>
+            <span>designed and coded by Hamza belghazi</span>
+          </p>
+        </footer>
+      </div>
+    </main>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

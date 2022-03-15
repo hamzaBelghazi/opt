@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/favicon.svg" type="image/svg" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="/css/splide.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body class="">
+    <main class="main_app">
+      <div id="overlay">
+        <div id="progstat"></div>
+        <div id="progress"></div>
+      </div>
+      <div class="spinnerLoad">
+        <div class="loader"></div>
+      </div>
+      <!-- header -->
+      <%- include('partials/header'); %>
+
+      <!-- main -->
+
+      <%- body %>
+
+      <!-- footer -->
+
+      <%- include('partials/footer'); %>
+    </main>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/js/splide.min.js"></script>
+    <script src="/js/interact.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/bundle.js"></script>
+  </body>
+</html>

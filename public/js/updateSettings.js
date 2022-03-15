@@ -2,8 +2,7 @@
 import axios from 'axios';
 
 import { showAlert } from './alerts';
-
-const bannerContainer = document.querySelector('.old_banners');
+const bannerContainer = document.querySelector('.banner_container');
 const collectionsContainer = document.querySelector('.old--collections');
 const categorysContainer = document.querySelector('.old--categories');
 const announcesContainer = document.querySelector('.old_announces');
@@ -46,14 +45,28 @@ export const addBanner = async (data) => {
       url: 'api/banners/addbanner',
       data,
     });
-
+    console.log(res);
     if (res.data.status === 'success') {
       showAlert('success', `banner added successfully!`);
       const bannerHtml = `
-      <div class="old-banner">
-        <img class="old_banner_img" src="/img/banners/${res.data.data.data.slide}" alt='${res.data.data.data.link}'>
-        <span class="delete_old_banner" data-banner='${res.data.data.data._id}'>x</span>
-      </div>
+           <tr>
+                    <td class="column1">
+                      <img
+                        class="banner_preview"
+                        src="/img/banners/${res.data.data.data.slide}"
+                        alt=""
+                      />
+                    </td>
+                    <td class="column5">${res.data.data.data.link}</td>
+                    <td class="column7">
+                      <span
+                        class="material-icons delete delete_old_banner"
+                        data-banner="${res.data.data.data._id}"
+                      >
+                        delete
+                      </span>
+                    </td>
+                  </tr>
       
       `;
       bannerContainer.insertAdjacentHTML('beforeend', bannerHtml);
@@ -159,10 +172,24 @@ export const addNewcollection = async (data) => {
     if (res.data.status === 'success') {
       showAlert('success', `Collection added successfully!`);
       const html = `
-      <div class="old-banner">
-        <img class="old_banner_img" src="/img/collection/${res.data.data.data.collectionImage}" alt='${res.data.data.data.name}'>
-        <span class="delete_old_collection" data-id='${res.data.data.data._id}'>x</span>
-      </div>
+      <tr>
+      <td class="column3">${res.data.data.data.name}</td>
+      <td class="column4">
+        <img
+          src="/img/collection/${res.data.data.data.collectionImage}"
+          class="collection_img"
+        />
+      </td>
+      <td class="column7">
+        <span
+          data-id="${res.data.data.data.id} "
+          =""
+          class="material-icons delete delete_old_collection"
+        >
+          delete
+        </span>
+      </td>
+    </tr>
       `;
       collectionsContainer.insertAdjacentHTML('beforeend', html);
       spinnerhidd();
@@ -206,10 +233,24 @@ export const addNewCategory = async (data) => {
     if (res.data.status === 'success') {
       showAlert('success', `category added successfully!`);
       const html = `
-      <div class="old-banner">
-        <img class="old_banner_img" src="/img/category/${res.data.data.data.categoryImage}" alt='${res.data.data.data.name}'>
-        <span class="delete_old_category" data-id='${res.data.data.data._id}'>x</span>
-      </div>
+      <tr>
+      <td class="column3">${res.data.data.data.name}</td>
+      <td class="column4">
+        <img
+          src="/img/category/${res.data.data.data.categoryImage}"
+          class="category_img"
+        />
+      </td>
+      <td class="column7">
+        <span
+          data-id="${res.data.data.data.id} "
+          =""
+          class="material-icons delete delete_old_category"
+        >
+          delete
+        </span>
+      </td>
+    </tr>
       `;
       categorysContainer.insertAdjacentHTML('beforeend', html);
       spinnerhidd();
@@ -256,13 +297,12 @@ export const addNewAnnounce = async (data) => {
       showAlert('success', `Annoucement added successfully!`);
       console.log(res.data.data);
       const html = `
-      <div class='announce'>
-        <span class="announce--body">
-          ${res.data.data.data.announceText}
-        </span>
-        <span class="announce--delete" data-id='${res.data.data.data.id}''>x</span>
-      </div>
-
+      <tr>
+      <td class="column3">${res.data.data.data.announceText}</td>
+      <td class="column7">
+        <span class="material-icons delete" ${res.data.data.data.id}> delete </span>
+      </td>
+    </tr>
       `;
       announcesContainer.insertAdjacentHTML('beforeend', html);
       spinnerhidd();
@@ -276,14 +316,13 @@ export const addNewAnnounce = async (data) => {
 export const deleteAnnounce = async (aId) => {
   try {
     spinnerLoader();
-
     const res = await axios({
       method: 'DELETE',
       url: `api/announces/${aId}`,
     });
 
     if (res.status === 204) {
-      showAlert('success', `category Deleted successfully!`);
+      showAlert('success', `Announce Deleted successfully!`);
       spinnerhidd();
     }
   } catch (err) {
@@ -329,12 +368,14 @@ export const addNewPage = async (name, pageBody) => {
     if (res.data.status === 'success') {
       showAlert('success', `page added successfully!`);
       const html = `
-      <div class='page'>
-        <span class="old_page_name">
-          ${res.data.data.data.name}
+      <tr>
+      <td class="column3">${res.data.data.data.name}</td>
+      <td class="column7">
+        <span class="material-icons delete page--delete" data-id="${res.data.data.data.id}">
+          delete
         </span>
-        <span class="delete_old_page" data-id='${res.data.data.data.id}''>x</span>
-      </div>
+      </td>
+    </tr>
 
       `;
       pagesContainer.insertAdjacentHTML('beforeend', html);
@@ -377,7 +418,10 @@ export const addNewProduct = async (data) => {
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', `Product added successfully!`);
+      showAlert(
+        'success',
+        `Product added successfully please add Try on 3D object!`
+      );
       selectedProd.value = res.data.data.data.id;
       spinnerhidd();
     }
@@ -424,7 +468,7 @@ export const addNewFav = async (product, user) => {
 
     if (res.data.status === 'success') {
       showAlert('success', `product  added to favourite!`);
-      spinnerhidd();
+      location.reload(true);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
@@ -443,7 +487,7 @@ export const deleteFav = async (fId) => {
 
     if (res.status === 204) {
       showAlert('success', `product removed from favourite!`);
-      spinnerhidd();
+      location.reload(true);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);

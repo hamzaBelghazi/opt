@@ -1,0 +1,40 @@
+<!-- section login -->
+<section class="login_section section">
+  <form class="login_form form--login">
+    <div class="container">
+      <h1><%= __('Login') %></h1>
+      <p><%= __('login_text') %></p>
+      <img src="/assets/login.svg" alt="login" />
+      <label for="email"><b> <%= __('email') %> </b></label
+      ><input
+        id="email"
+        type="text"
+        placeholder="<%= __('email_placeholder') %> "
+        name="email"
+        required=""
+      /><label for="psw"><b> <%= __('password') %> </b></label
+      ><input
+        id="password"
+        type="password"
+        placeholder="<%= __('password_placeholder') %> "
+        name="password"
+        required=""
+      /><button class="loginBtn primary_button" type="submit">
+        <%= __('login_btn') %>
+      </button>
+    </div>
+    <div class="container forggot">
+      <p>
+        <a class="forggot_password_btn" href="/forggotPassword">
+          <%= __('Forggot_password') %> </a
+        >.
+      </p>
+    </div>
+    <div class="container register">
+      <p>
+        <%= __('dont_have_account') %>
+        <a href="/register"><%= __('Signup_btn') %> </a>.
+      </p>
+    </div>
+  </form>
+</section>

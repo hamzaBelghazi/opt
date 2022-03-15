@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link href="/css/quill.snow.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/admin/dashboard.css" />
+    <title>mhsOptics / dashboard</title>
+  </head>
+  <body>
+    <main class="main_app">
+      <div class="spinnerLoad">
+        <div class="loader"></div>
+      </div>
+      <div class="actions_overlay">
+        <div class="overlay"></div>
+        <div class="hidd_overlay">
+          <span class="material-icons">close</span>
+        </div>
+        <div class="action_add">
+          <form action="" id="page-form" class="page--form">
+            <input
+              type="text"
+              id="page-name"
+              type="text"
+              name="page-name"
+              placeholder="Name of the page"
+            />
+            <div class="text_editor">
+              <div id="editor" name="text_editor">
+                <p>Hello World!</p>
+                <div style="background-color: aqua">
+                  <p>hamza</p>
+                </div>
+              </div>
+            </div>
+            <input type="submit" class="post_page_btn" value="Post" />
+          </form>
+        </div>
+      </div>
+      <div class="navigation">
+        <a href="/admin" class="logo"> mhsOptics </a>
+        <ul class="main_list">
+          <li>
+            <a href="/admin">
+              <span class="material-icons"> home </span>
+              <span class="text">Dashboard </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-banners-setting">
+              <span class="material-icons"> ad_units </span>
+              <span class="text">Banners </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-users-setting">
+              <span class="material-icons"> people </span>
+              <span class="text"> Users </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-orders-setting">
+              <span class="material-icons"> bookmark_border </span>
+              <span class="text">Orders </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-products-setting">
+              <span class="material-icons"> production_quantity_limits </span>
+              <span class="text">Products </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-lenses-setting">
+              <span class="material-icons"> lens </span>
+              <span class="text">Lens</span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-categories-setting">
+              <span class="material-icons"> category </span>
+              <span class="text">categoris </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-collections-setting">
+              <span class="material-icons"> collections </span>
+              <span class="text">Collections </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-announcments-setting">
+              <span class="material-icons"> campaign </span>
+              <span class="text">Announcment </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-pages-setting" class="active">
+              <span class="material-icons"> article </span>
+              <span class="text">Pages</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="container">
+        <header class="dashboard__header">
+          <a class="toggle_nav">
+            <svg viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </a>
+          <div class="nav">Hicham sabagh</div>
+        </header>
+        <section class="main__section">
+          <div class="actions__container">
+            <div class="section__title">
+              <h2 class="title">Pages settings</h2>
+              <a href="#" class="add add_simple_btn">Add Pages</a>
+            </div>
+            <div class="table100">
+              <table>
+                <thead>
+                  <tr class="table100-head">
+                    <th class="column3">Pages</th>
+                    <th class="column7">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="old--pages">
+                  <% if(pages) {%> <% pages.map((p)=>{ %>
+                  <tr>
+                    <td class="column3"><%= p.name %></td>
+                    <td class="column7">
+                      <span
+                        data-id="<%=  p.id  %> "
+                        class="material-icons delete delete_old_page"
+                      >
+                        delete
+                      </span>
+                    </td>
+                  </tr>
+                  <% }) %> <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <script src="/js/quill.js"></script>
+        <%- include('_admin-footer') %>
+      </div>
+    </main>
+
+    <script>
+      const quill = new Quill('#editor', {
+        theme: 'snow',
+        placeholder: 'Compose an epic...',
+      });
+    </script>
+  </body>
+</html>

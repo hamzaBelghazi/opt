@@ -1,0 +1,52 @@
+form {
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    margin-top: 24px;
+    align-items: center;
+    h1 {
+      margin: 8px 0px;
+    }
+    p {
+      margin-top: 16px;
+    }
+    a {
+      color: $primary--color;
+    }
+    img {
+      margin-top: 16px;
+      width: 270px;
+    }
+    label,
+    input {
+      width: 100%;
+    }
+    label {
+      margin-top: 16px;
+    }
+    input {
+      margin-top: 8px;
+      padding: 16px;
+      border: 1px solid $text--gray--color;
+      border-radius: 4px;
+      font-size: 18px;
+      background-color: $text--whiter--color;
+      outline-color: $primary--color;
+      &:hover {
+        border-color: $primary--color;
+      }
+    }
+    button {
+      margin-top: 24px;
+      width: 100%;
+      padding: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 18px;
+      background-color: $primary--color;
+      color: white;
+      border: none;
+    }
+  }
+}

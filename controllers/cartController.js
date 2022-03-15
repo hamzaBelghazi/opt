@@ -30,21 +30,25 @@ exports.addglassesWithlenses = catchAsync(async (req, res, next) => {
     ' title price glassWidth sideSize lenseSize description images'
   );
   const v = req.body.lensesOpt;
+  const p = req.body.lensesParameters;
+
   const thickPrice = lens[0].thickness.filter((tk) =>
-    tk.subtitle.startsWith(v.thicknessType.type)
+    tk.subtitle.startsWith(v.thicknessType?.type)
   )[0].price;
   const adLensPrice = lens[0].advancedLensType.filter((ad) =>
-    ad.subtitle.startsWith(v.advancedLensesType.type)
+    ad.subtitle.startsWith(v.advancedLensesType?.type)
   )[0].price;
 
   totalP = product.price + thickPrice + adLensPrice;
   let item = {
+    params: p,
     item: product,
     lenses: v,
     price: totalP,
     id: product.id,
     type: 'glassesWithlense',
   };
+
   cart.add(item, item.id);
   req.session.cart = cart;
   res.status(200).json({ status: 'success' });

@@ -8,7 +8,7 @@ router.use(authController.protect);
 
 router.get('/checkout-session', orderController.getCheckoutSession);
 
-router.get('/createorder', orderController.createOrderCheckout);
+// router.get('/createorder', orderController.createOrderCheckout);
 
 router.use(authController.restrictTo('admin'));
 

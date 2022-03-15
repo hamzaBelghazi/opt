@@ -30,13 +30,13 @@ import {
   setNewPassword,
   sendVerToken,
 } from './updateSettings';
-// import { orderGlasses } from './stripe';
+import { orderGlasses } from './stripe';
 
 import { filterProd, loadeMoreProd } from './products';
 
 const loginForm = document.querySelector('.form--login');
 const registerForm = document.querySelector('.form--register');
-const logOutBtn = document.querySelector('.nav__el--logout');
+const logOutBtn = document.querySelectorAll('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 
@@ -49,7 +49,6 @@ const filterContainer = document.querySelector('.filter_container');
 const pagenationBtn = document.querySelector('.load_more_btn');
 const BannerDataForm = document.querySelector('.banner--form');
 const BannerDeleteBtn = document.querySelectorAll('.delete_old_banner');
-const bannerContainer = document.querySelector('.old_banners');
 const productDeleteBtn = document.querySelectorAll('.delete--prode');
 const ProdContainer = document.querySelector('.products--list');
 const completOrdersbtns = document.querySelectorAll('.edit--order');
@@ -66,8 +65,8 @@ const lensesDataForm = document.querySelector('#lenes-form');
 const productDataForm = document.querySelector('.product--form');
 const tryOnDataForm = document.querySelector('#try_on_form');
 
-const addFavBtn = document.querySelector('.add_fav');
-const DeleteFavBtn = document.querySelector('.delete_fav');
+const addFavBtn = document.querySelectorAll('.add_fav');
+const DeleteFavBtn = document.querySelectorAll('.delete_fav');
 
 const passwordDataForm = document.querySelector('.password--form');
 const forggotPasswordDataForm = document.querySelector('.forggot_password');
@@ -90,7 +89,11 @@ if (registerForm)
 
     register(firstName, lastName, email, password, passwordConfirm);
   });
-if (logOutBtn) logOutBtn.addEventListener('click', logout);
+if (logOutBtn) {
+  logOutBtn.forEach((b) => {
+    b.addEventListener('click', logout);
+  });
+}
 
 if (userDataForm)
   userDataForm.addEventListener('submit', (e) => {
@@ -129,7 +132,7 @@ if (userPasswordForm)
 if (addSimpleToCart) {
   addSimpleToCart.addEventListener('click', function (e) {
     e.preventDefault();
-    addGlassesWithLenses(lensesCart, e.target.dataset.id);
+    addGlassesWithLenses(lensesParameters, lensesCart, e.target.dataset.id);
   });
 }
 
@@ -194,7 +197,7 @@ if (filterContainer) {
     }
     const query = arrFilter.join('&');
 
-    filterProd(query);
+    location.assign(`${location.origin}${location.pathname}?${query}`);
   });
 }
 
@@ -213,21 +216,23 @@ if (pagenationBtn) {
 }
 
 if (BannerDataForm)
-  BannerDataForm.addEventListener('submit', (e) => {
+  BannerDataForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const form = new FormData();
     form.set('link', document.getElementById('banner-url').value);
     form.set('slide', document.getElementById('banner-img').files[0]);
-    addBanner(form);
-    e.target.reset();
+    addBanner(form).then(() => {
+      hiddOverlay();
+    });
   });
 
 if (BannerDeleteBtn) {
   BannerDeleteBtn.forEach((b) => {
-    b.addEventListener('click', function (e) {
+    b.addEventListener('click', async function (e) {
       const { banner } = e.target.dataset;
-      removeBanner(banner);
-      bannerContainer.removeChild(e.target.parentElement);
+      removeBanner(banner).then(() => {
+        e.target.parentElement.parentElement.remove();
+      });
     });
   });
 }
@@ -246,11 +251,10 @@ if (completOrdersbtns) {
   completOrdersbtns.forEach((btn) => {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
-
       const { id } = e.target.dataset;
       CompletOrder(id);
-      const p = '<p>completed!</p>';
-      e.target.parentElement.parentElement.classList.add('recived');
+      const p =
+        '<button class="complete" disabled="disabled"> completed!</button>';
       e.target.parentElement.insertAdjacentHTML('afterBegin', p);
       e.target.parentElement.removeChild(e.target);
     });
@@ -280,6 +284,7 @@ if (collectionDataForm) {
     );
     addNewcollection(form);
     e.target.reset();
+    hiddOverlay();
   });
 }
 
@@ -289,7 +294,7 @@ if (deleteCollectionBtn) {
       e.preventDefault();
       const { id } = e.target.dataset;
       deleteCollection(id);
-      e.target.parentElement.remove();
+      e.target.parentElement.parentElement.remove();
     });
   });
 }
@@ -304,7 +309,7 @@ if (categoryDataForm) {
       document.querySelector('#category-img').files[0]
     );
     addNewCategory(form);
-    e.target.reset();
+    hiddOverlay();
   });
 }
 
@@ -314,7 +319,7 @@ if (deletecategoryBtn) {
       e.preventDefault();
       const { id } = e.target.dataset;
       deleteCategory(id);
-      e.target.parentElement.remove();
+      e.target.parentElement.parentElement.remove();
     });
   });
 }
@@ -324,6 +329,7 @@ if (announceDataForm) {
     const text = document.querySelector('#announce-body').value;
     addNewAnnounce(text);
     e.target.reset();
+    hiddOverlay();
   });
 }
 
@@ -332,8 +338,9 @@ if (announceDeleteBtn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
       const { id } = e.target.dataset;
+      console.log(id);
       deleteAnnounce(id);
-      e.target.parentElement.remove();
+      e.target.parentElement.parentElement.remove();
     });
   });
 }
@@ -341,9 +348,11 @@ if (pageDataForm) {
   pageDataForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const name = document.querySelector('#page-name').value;
-    const pageBody = CKEDITOR.instances.text_editor.getData();
-    addNewPage(name, pageBody);
+    const myEditor = document.querySelector('#editor');
+    const html = myEditor.children[0].innerHTML;
+    addNewPage(name, html);
     e.target.reset();
+    hiddOverlay();
   });
 }
 
@@ -353,7 +362,7 @@ if (deletePageBtn) {
       e.preventDefault();
       const { id } = e.target.dataset;
       deletePage(id);
-      e.target.parentElement.remove();
+      e.target.parentElement.parentElement.remove();
     });
   });
 }
@@ -365,7 +374,6 @@ const addTypeToFormHelper = function (formdata, type) {
 };
 const addFileToFormHelper = function (formdata, type) {
   type.forEach((t) => {
-
     formdata.append(t.name, t.files[0]);
   });
 };
@@ -476,21 +484,28 @@ if (tryOnDataForm) {
     });
     addNewVert(form);
     e.target.reset();
+    hiddOverlay();
   });
 }
 
 if (addFavBtn) {
-  addFavBtn.addEventListener('click', function (e) {
-    const { product, user } = e.target.dataset;
-    addNewFav(product, user);
-    e.target.remove();
+  addFavBtn.forEach((add) => {
+    add.addEventListener('click', function (e) {
+      e.preventDefault();
+      const anchor = e.target.parentElement;
+      const { product, user } = anchor.dataset;
+      addNewFav(product, user);
+    });
   });
 }
 if (DeleteFavBtn) {
-  DeleteFavBtn.addEventListener('click', function (e) {
-    const { fav } = e.target.dataset;
-    deleteFav(fav);
-    e.target.remove();
+  DeleteFavBtn.forEach((del) => {
+    del.addEventListener('click', function (e) {
+      e.preventDefault();
+      const anchor = e.target.parentElement;
+      const { fav } = anchor.dataset;
+      deleteFav(fav);
+    });
   });
 }
 

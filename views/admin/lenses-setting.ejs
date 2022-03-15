@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="/css/admin/dashboard.css" />
+    <title>mhsOptics / dashboard</title>
+  </head>
+  <body>
+    <main class="main_app">
+      <div class="spinnerLoad">
+        <div class="loader"></div>
+      </div>
+      <div class="navigation">
+        <a href="/admin" class="logo"> mhsOptics </a>
+        <ul class="main_list">
+          <li>
+            <a href="/admin">
+              <span class="material-icons"> home </span>
+              <span class="text">Dashboard </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-banners-setting">
+              <span class="material-icons"> ad_units </span>
+              <span class="text">Banners </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-users-setting">
+              <span class="material-icons"> people </span>
+              <span class="text"> Users </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-orders-setting">
+              <span class="material-icons"> bookmark_border </span>
+              <span class="text">Orders </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-products-setting">
+              <span class="material-icons"> production_quantity_limits </span>
+              <span class="text">Products </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-lenses-setting" class="active">
+              <span class="material-icons"> lens </span>
+              <span class="text">Lens</span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-categories-setting">
+              <span class="material-icons"> category </span>
+              <span class="text">categoris </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-collections-setting">
+              <span class="material-icons"> collections </span>
+              <span class="text">Collections </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-announcments-setting">
+              <span class="material-icons"> campaign </span>
+              <span class="text">Announcment </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-pages-setting">
+              <span class="material-icons"> article </span>
+              <span class="text">Pages</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="container">
+        <header class="dashboard__header">
+          <a class="toggle_nav">
+            <svg viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </a>
+          <div class="nav">Hicham sabagh</div>
+        </header>
+        <section class="main__section">
+          <div class="actions__container">
+            <div class="section__title">
+              <h2 class="title">Lenses settings</h2>
+            </div>
+            <div class="lenses_wrapper">
+              <form
+                class="lense_form"
+                id="lenes-form"
+                data-id="<%= lense.id  %> "
+              >
+                <input
+                  id="lenses-title"
+                  type="text"
+                  name="title"
+                  value="<%= lense.title  %> "
+                />
+                <h3>Lenses Type</h3>
+                <div class="lent_type">
+                  <% if(lense.lensType) { %> <% lense.lensType.map((type , i )=>
+                  {%>
+                  <div class="type">
+                    <input
+                      class="lenses_type"
+                      type="text"
+                      name="lensType[<%= i %>][subtitle]"
+                      value="<%= type.subtitle %>"
+                    /><textarea
+                      class="description_type_lense"
+                      type="text"
+                      name="lensType[<%= i %>][desc]"
+                      placeholder="description"
+                    >
+<%= type.desc %>
+                    </textarea>
+                  </div>
+                  <% }) %> <% } else { %>
+                  <div class="type">
+                    <input
+                      class="lenses_type"
+                      type="text"
+                      name="lensType[0][subtitle]"
+                      placeholder="name"
+                    /><textarea
+                      class="description_type_lense"
+                      type="text"
+                      name="lensType[0][desc]"
+                      placeholder="description"
+                    >
+                    </textarea>
+                  </div>
+                  <% } %>
+                  <button class="add_lense_type_btn">+</button>
+                </div>
+                <h3>thikness</h3>
+                <div class="thikness">
+                  <% if(lense.thickness) {%> <% lense.thickness.map((tick , i)=>
+                  {%>
+                  <div class="thik">
+                    <input
+                      class="thikness_title"
+                      type="text"
+                      name="thickness[<%= i %>][subtitle]"
+                      value="<%= tick.subtitle %> "
+                      placeholder="name"
+                    />
+                    <textarea
+                      class="thikness_description"
+                      name="thickness[<%= i %>][desc]"
+                      value=""
+                    >
+ <%= tick.desc %>
+                    </textarea>
+                    <input
+                      class="thikness_refraction"
+                      type="text"
+                      name="thickness[<%= i %>][refraction]"
+                      value="<%= tick.refraction %>"
+                      placeholder="refraction"
+                    />
+                    <input
+                      class="thikness_preview"
+                      type="file"
+                      name="thickness[<%= i %>][photo]"
+                      value=""
+                    />
+                    <input
+                      class="thickness_price"
+                      type="number"
+                      name="thickness[<%= i %>][price]"
+                      value="<%= tick.price %>"
+                      placeholder="price"
+                    />
+                  </div>
+                  <% } )%> <% } else {%>
+                  <div class="thik">
+                    <input
+                      class="thikness_title"
+                      type="text"
+                      name="thickness[0][subtitle]"
+                      value=""
+                      placeholder="name"
+                    />
+                    <textarea
+                      class="thikness_description"
+                      name="thickness[0][desc]"
+                      value=""
+                    ></textarea>
+                    <input
+                      class="thikness_refraction"
+                      type="text"
+                      name="thickness[0][refraction]"
+                      value=""
+                      placeholder="refraction"
+                    />
+                    <input
+                      class="thikness_preview"
+                      type="file"
+                      name="thickness[0][photo]"
+                      value=""
+                    />
+                    <input
+                      class="thickness_price"
+                      type="number"
+                      name="thickness[0][price]"
+                      value=""
+                      placeholder="price"
+                    />
+                  </div>
+                  <% } %>
+                  <button class="add_thikness_btn">+</button>
+                </div>
+                <h3>advanced lenes Type</h3>
+                <div class="ad_lense_type">
+                  <% if(lense.advancedLensType) {%> <%
+                  lense.advancedLensType.map((ad , i)=> {%>
+                  <div class="adType">
+                    <input
+                      class="ad_type_title"
+                      type="text"
+                      name="advancedLensType[<%= i %>][subtitle]"
+                      value="<%= ad.subtitle %>"
+                      placeholder="title"
+                    /><textarea
+                      class="ad_type_description"
+                      name="advancedLensType[<%= i %>][desc]"
+                      value=""
+                      placeholder="description"
+                    >
+<%= ad.desc %>
+                    </textarea
+                    ><input
+                      class="ad_type_price"
+                      type="number"
+                      name="advancedLensType[<%= i %>][price]"
+                      value="<%= ad.price %>"
+                      min="0"
+                      placeholder="price"
+                    />
+                  </div>
+                  <% } )%> <% } else {%>
+                  <div class="adType">
+                    <input
+                      class="ad_type_title"
+                      type="text"
+                      name="advancedLensType[0][subtitle]"
+                      value=""
+                      placeholder="title"
+                    /><textarea
+                      class="ad_type_description"
+                      name="advancedLensType[0][desc]"
+                      value=""
+                      placeholder="description"
+                    ></textarea
+                    ><input
+                      class="ad_type_price"
+                      type="number"
+                      name="advancedLensType[0][price]"
+                      value=""
+                      min="0"
+                      placeholder="price"
+                    />
+                  </div>
+                  <% } %>
+                  <button class="add_advanced_btn">+</button>
+                </div>
+
+                <input class="save_lenses_btn" type="submit" value="Save" />
+              </form>
+            </div>
+          </div>
+        </section>
+        <%- include('_admin-footer') %>
+      </div>
+    </main>
+  </body>
+</html>

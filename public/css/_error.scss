@@ -1,0 +1,25 @@
+.error_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  img {
+    height: 50%;
+  }
+  .error_message {
+    height: 50%;
+    margin-top: 16px;
+    .warning {
+      font-size: 20px;
+      color: $text--color;
+    }
+    .message {
+      font-size: 18px;
+      color: $text--gray--color;
+      text-align: center;
+      margin-top: 16px;
+    }
+  }
+}

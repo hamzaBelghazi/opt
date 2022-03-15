@@ -1,0 +1,136 @@
+.try__on__overlay {
+  position: fixed;
+  width: 100%;
+  max-height: 0;
+  z-index: 114;
+  display: grid;
+  place-content: center;
+  top: 0;
+  overflow: hidden;
+
+  &.active_tryon_mirror {
+    max-height: 100vh;
+    height: 100vh;
+  }
+  .overlay_try_on {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+.try_on_container {
+  width: 80vw;
+  .close_try_on {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    z-index: 115;
+    color: white;
+  }
+  #JeelizVTOWidget {
+    height: 90vh;
+    background-color: black;
+    border: 4px solid white;
+    flex-grow: 1;
+    width: 90%;
+    max-width: calc(100vh - 70px);
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+
+  #JeelizVTOWidgetCanvas {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .JeelizVTOWidgetControls {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    button {
+      background-color: $primary--color;
+      color: white;
+      border: none;
+      padding: 8px;
+    }
+  }
+  .buttonIcon {
+    display: inline-block;
+    margin-right: 8px;
+  }
+
+  .JeelizVTOWidgetControlsTop {
+    top: 16px;
+    height: 40px;
+  }
+  .JeelizVTOWidgetControlsTop > button {
+    background-color: $primary--color;
+    color: $text--whiter--color;
+    border: none;
+    margin: 4px;
+    width: 45%;
+    min-width: auto;
+  }
+
+  #JeelizVTOWidgetChangeModelContainer {
+    display: flex;
+    justify-content: center;
+    bottom: 16px;
+    height: 40px;
+    width: 100%;
+  }
+  #JeelizVTOWidgetChangeModelContainer > button {
+    width: 20%;
+    min-width: auto;
+  }
+
+  .JeelizVTOWidgetLoadingText {
+    color: white;
+    font-size: 32pt;
+    margin-top: 40vh;
+  }
+
+  #JeelizVTOWidgetAdjustNotice {
+    width: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    z-index: 3;
+    font-size: 16px;
+    bottom: 0;
+    justify-content: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    display: none;
+  }
+
+  #JeelizVTOWidgetAdjustExit {
+    border: 1px solid white;
+    color: white;
+    background: transparent;
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+  }
+
+  /* Hide everything, stuffs will be displayed by JeelizVTOWidget: */
+  #JeelizVTOWidgetAdjust {
+    display: none;
+  }
+  #JeelizVTOWidgetChangeModelContainer {
+    display: none;
+  }
+  #buttonResizeCanvas {
+    display: none;
+  }
+}

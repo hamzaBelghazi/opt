@@ -1,0 +1,230 @@
+<!-- overlay toggle elements -->
+<div class="cart__toggle">
+  <div class="cart__overlay"></div>
+  <div class="cart__container">
+    <div class="cart__header">
+      <span class="cart__title"><%= __('cart') %></span>
+      <span class="material-icons cart__close"> close </span>
+    </div>
+    <div class="cart__body">
+      <% if(list.length === 0) { %>
+      <span class="empty__cart"> <%= __('cart_emty') %></span>
+      <% } %> <% if(list.length > 0) {%>
+      <div class="items__cart__container">
+        <div class="items">
+          <% list.map(l => { %>
+          <div class="item">
+            <a
+              href="/product/<%= `${l.item.id || l.item.item.id}` %>"
+              class="item_link"
+            >
+              <img
+                class="item__img"
+                src="/img/products/<%= `${l.item.images?.[0] || l.item.item.images[0] }` %>"
+                alt=""
+              />
+            </a>
+            <div class="item__desc">
+              <a href="#" class="item__name"
+                ><%= `${l.item.title || l.item.item.title }` %></a
+              >
+              <p class="item__price">
+                <%= `${l.price || l.item.price}` %>
+                <span class="currency">$</span>
+              </p>
+              <p class="item__info">
+                <%= `${l.quantity || l.item.quantity}` %> Frames , <%
+                if(l.item.params){ %> <% for (const p in l.item.params) { %> <%=
+                p %> :<%= l.item.params[p] %> <br />
+                <% } %> <% } %> <%= `${l.item.glassWidth ||
+                l.item.item.glassWidth}` %> / <%= `${l.item.sideSize ||
+                l.item.item.sideSize}` %>
+              </p>
+              <a
+                href="#"
+                class="remove__item_link remove_item__cart"
+                data-id="<%= `${l.item.id || l.item.item.id}` %> "
+              >
+                <span class="remove__item">
+                  <%= __('remove_item_cart') %>
+                </span>
+              </a>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <div class="items__checkout">
+          <div class="subtotal__container">
+            <span class="subtotal__text"> <%= __('cart_subtotal') %> </span>
+            <p class="subtotal__amount">
+              <%= totalPrice %> <span class="currency"> $ </span>
+            </p>
+          </div>
+          <a class="primary_button checkout__btn checkout_btn" href="#">
+            <%= __('cart_checkout') %>
+          </a>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<div class="menu__toggle">
+  <div class="menu__overlay"></div>
+  <div class="menu__container">
+    <div class="menu__header">
+      <span class="menu__lang">
+        <div class="lang_toggle_container">
+          <span class="material-icons"> language </span>
+          <ul class="avaliable_lang">
+            <li>
+              <a href="/setlocale/en" class="language-link" data-lang="en"
+                >🇬🇧 Eng</a
+              >
+            </li>
+            <li>
+              <a href="/setlocale/de" class="language-link" data-lang="de"
+                >🇩🇪 Detsch</a
+              >
+            </li>
+          </ul>
+        </div>
+      </span>
+      <span class="material-icons menu__close"> close </span>
+    </div>
+    <div class="menu__body">
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="/prescription" class="nav-link">
+              <%= __('persctiption') %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/sunglasses" class="nav-link"> <%= __('sunglasses') %> </a>
+          </li>
+          <li class="nav-item">
+            <a href="/account/#favourite-products" class="nav-link">
+              <%= __('wishlist') %>
+            </a>
+          </li>
+          <% if(locals.user) { %>
+          <li class="nav-item">
+            <a href="/account/#account-details" class="nav-link">
+              <%= __('account') %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link nav__el--logout">
+              <%= __('logout') %>
+            </a>
+          </li>
+          <% } %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- navigation menu -->
+<header class="header">
+  <div class="logo">
+    <span class="toggle_menu_btn menu_link"
+      ><svg viewBox="0 0 20 20">
+        <path
+          fill-rule="evenodd"
+          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+          clip-rule="evenodd"
+        ></path></svg
+    ></span>
+    <a href="/" class="logo--link">
+      <span class="name">Mhs.</span>
+      <img src="/assets/logo.png" alt="mhsoptics" />
+    </a>
+  </div>
+  <nav class="main-nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="/prescription" class="nav-link"> <%= __('persctiption') %> </a>
+      </li>
+      <li class="nav-item">
+        <a href="/sunglasses" class="nav-link"> <%= __('sunglasses') %> </a>
+      </li>
+      <li class="nav-item">
+        <a href="/account/#favourite-products" class="nav-link">
+          <%= __('wishlist') %>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="shortcuts">
+    <form class="search__container" action="/search">
+      <input type="text" placeholder="Search.." name="q" />
+      <span class="material-icons search__icon icon"> search </span>
+    </form>
+    <span class="material-icons search__icon icon toggle__search">
+      search
+    </span>
+    <div class="user__log">
+      <% if(locals.user) { %>
+      <a href="/account/#account-details" class="user_link">
+        <span class="material-icons user__icons icon"> perm_identity </span>
+      </a>
+      <% }else{ %>
+      <a href="/login" class="user_link">
+        <span class="material-icons user__icons icon"> perm_identity </span>
+      </a>
+      <% }%>
+    </div>
+    <div class="lang_toggle_container">
+      <span class="material-icons"> language </span>
+      <ul class="avaliable_lang">
+        <li>
+          <a href="/setlocale/en" class="language-link" data-lang="en"
+            >🇬🇧 Eng</a
+          >
+        </li>
+        <li>
+          <a href="/setlocale/de" class="language-link" data-lang="de"
+            >🇩🇪 Detsch</a
+          >
+        </li>
+      </ul>
+    </div>
+    <% if (locals.user){ %>
+    <a href="#" class="nav__el--logout">
+      <span class="material-icons nav__el--logout">logout</span>
+    </a>
+    <% } %>
+    <div class="cart__nav">
+      <a href="#" class="cart_link">
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 44 44"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.29117 18.04C7.36492 17.1211 7.78205 16.2638 8.45951 15.6386C9.13696 15.0135 10.025 14.6665 10.9468 14.6667H33.0532C33.975 14.6665 34.863 15.0135 35.5405 15.6386C36.218 16.2638 36.6351 17.1211 36.7088 18.04L38.181 36.3733C38.2215 36.8779 38.1571 37.3853 37.9919 37.8637C37.8266 38.3421 37.5641 38.7811 37.2209 39.1531C36.8777 39.5251 36.4611 39.822 35.9975 40.0251C35.5339 40.2283 35.0333 40.3332 34.5272 40.3333H9.47284C8.96669 40.3332 8.46606 40.2283 8.00246 40.0251C7.53887 39.822 7.12234 39.5251 6.77911 39.1531C6.43588 38.7811 6.17339 38.3421 6.00815 37.8637C5.84291 37.3853 5.77851 36.8779 5.819 36.3733L7.29117 18.04V18.04Z"
+            stroke="black"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M29.3333 20.1667V11C29.3333 9.05508 28.5607 7.18982 27.1854 5.81456C25.8101 4.43929 23.9449 3.66667 22 3.66667C20.055 3.66667 18.1898 4.43929 16.8145 5.81456C15.4392 7.18982 14.6666 9.05508 14.6666 11V20.1667"
+            stroke="black"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <p class="total_price">
+          <%= `${totalPrice ? totalPrice : '0'}` %>
+          <span class="currency">$</span>
+        </p>
+      </a>
+    </div>
+  </div>
+</header>

@@ -6,10 +6,12 @@ const favSchema = mongoose.Schema(
     product: {
       type: mongoose.Schema.ObjectId,
       ref: 'Product',
+      required: [true, 'please provide a product'],
     },
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
+      required: [true, 'user must be logged in!'],
     },
   },
   {

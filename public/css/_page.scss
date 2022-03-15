@@ -1,0 +1,148 @@
+.page_header {
+  padding: 24px;
+  height: 70px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .navigation {
+    width: 100%;
+    border-bottom: 1px solid $text--white--color;
+    display: flex;
+    padding: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    a {
+      color: $primary--color;
+    }
+    .siparetor {
+      margin: 0px 8px;
+    }
+  }
+}
+.page_section {
+  .big__title {
+    margin-bottom: 32px;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+  }
+  .page_body {
+    color: $text--dark--color;
+    padding: 0px 10%;
+  }
+  img {
+    max-width: 100%;
+    margin: 16px 0px;
+    object-fit: contain;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 16px;
+    line-height: 32px;
+    font-weight: 400;
+  }
+  h1 {
+    font-size: 32px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  p {
+    font-size: 20px;
+    line-height: 32px;
+    margin: 16px 0px;
+    font-weight: normal;
+    color: $text--gray--color;
+  }
+  ul {
+    margin-top: 20px 0px;
+  }
+  li {
+    margin-top: 16px;
+    margin-left: 24px;
+    list-style: inherit;
+    line-height: 24px;
+    font-size: 18px;
+    color: $text--gray--color;
+  }
+  a {
+    color: $primary--color;
+  }
+}
+
+@media screen and(max-width:720px) {
+  .page_section {
+    .big__title {
+      font-size: 32px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 16px;
+      line-height: 32px;
+      font-weight: 400;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 18px;
+    }
+
+    li {
+      font-size: 16px;
+    }
+    a {
+      color: $primary--color;
+    }
+  }
+}
+@media screen and(max-width:480px) {
+  .page_section {
+    .big__title {
+      font-size: 28px;
+    }
+    .page_body {
+      color: $text--dark--color;
+      padding: 0px 2%;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    h2 {
+      font-size: 20px;
+    }
+    h3 {
+      font-size: 18px;
+    }
+    p {
+      font-size: 16px;
+    }
+
+    li {
+      font-size: 14px;
+    }
+    a {
+      color: $primary--color;
+    }
+  }
+}

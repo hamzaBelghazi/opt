@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="/css/admin/dashboard.css" />
+    <title>mhsOptics / dashboard</title>
+  </head>
+  <body>
+    <main class="main_app">
+      <div class="navigation">
+        <a href="/admin" class="logo"> mhsOptics </a>
+        <ul class="main_list">
+          <li>
+            <a href="/admin">
+              <span class="material-icons"> home </span>
+              <span class="text">Dashboard </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-banners-setting">
+              <span class="material-icons"> ad_units </span>
+              <span class="text">Banners </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-users-setting" class="active">
+              <span class="material-icons"> people </span>
+              <span class="text"> Users </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-orders-setting">
+              <span class="material-icons"> bookmark_border </span>
+              <span class="text">Orders </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-products-setting">
+              <span class="material-icons"> production_quantity_limits </span>
+              <span class="text">Products </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-lenses-setting">
+              <span class="material-icons"> lens </span>
+              <span class="text">Lens</span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-categories-setting">
+              <span class="material-icons"> category </span>
+              <span class="text">categoris </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-collections-setting">
+              <span class="material-icons"> collections </span>
+              <span class="text">Collections </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-announcments-setting">
+              <span class="material-icons"> campaign </span>
+              <span class="text">Announcment </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-pages-setting">
+              <span class="material-icons"> article </span>
+              <span class="text">Pages</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="container">
+        <header class="dashboard__header">
+          <a class="toggle_nav">
+            <svg viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </a>
+          <div class="nav">Hicham sabagh</div>
+        </header>
+        <section class="main__section">
+          <div class="actions__container">
+            <div class="section__title">
+              <h2 class="title">Users settings</h2>
+            </div>
+            <div class="table100">
+              <table>
+                <thead>
+                  <tr class="table100-head">
+                    <th class="column3">Name</th>
+                    <th class="column4">Email</th>
+                    <th class="column5">Role</th>
+                    <th class="column7">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(users){ %> <% users.map(user => {%>
+                  <tr>
+                    <td class="column3">
+                      <%= user.firstName +' '+ user.lastName %>
+                    </td>
+                    <td class="column4"><%= user.email %></td>
+                    <td class="column5"><%= user.role %></td>
+                    <td class="column7">
+                      <a href="#" class="delete"></a>
+                    </td>
+                  </tr>
+                  <% }) %> <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <footer class="footer">
+          <p class="copyright">
+            <span>&copy;</span>
+            <span>designed and coded by Hamza belghazi</span>
+          </p>
+        </footer>
+      </div>
+    </main>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

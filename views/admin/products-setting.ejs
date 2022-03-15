@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="/css/admin/dashboard.css" />
+    <title>mhsOptics / dashboard</title>
+  </head>
+  <body>
+    <main class="main_app">
+      <div class="spinnerLoad">
+        <div class="loader"></div>
+      </div>
+      <div class="actions_overlay">
+        <div class="overlay"></div>
+        <div class="hidd_overlay">
+          <span class="material-icons">close</span>
+        </div>
+        <div class="action_add">
+          <form class="product--form" id="product-form">
+            <h4>glasses setting</h4>
+            <div class="first_prod_set">
+              <input
+                id="prod_title"
+                type="text"
+                placeholder="title"
+                name="title"
+              /><input
+                id="prod_glassWidth"
+                type="number"
+                placeholder="glassWidth"
+                name="glassWidth"
+              /><input
+                id="prod_price"
+                type="number"
+                placeholder="$"
+                name="price"
+              /><input
+                id="prod_sideSize"
+                type="number"
+                placeholder="sideSize"
+                name="sideSize"
+              /><input
+                id="prod_lenseSize"
+                type="number"
+                placeholder="lenseSize"
+                name="lenseSize"
+              /><input
+                id="prod_lenseHeight"
+                type="number"
+                placeholder="lenseheight"
+                name="lenseHeight"
+              /><input
+                id="prod_noasSize"
+                type="number"
+                placeholder="noasSize"
+                name="noasSize"
+              /><input
+                id="prod_shape"
+                type="text"
+                name="shape"
+                placeholder="shape"
+              /><input
+                id="prod_colors"
+                type="text"
+                placeholder="colors"
+                name="colors"
+              /><input
+                id="prod_frameType"
+                type="text"
+                placeholder="frameType"
+                name="frameType"
+              /><input
+                id="prod_templeColor"
+                type="text"
+                placeholder="templeColor"
+                name="templeColor"
+              /><input
+                id="prod_productGender"
+                type="text"
+                placeholder="productGender"
+                name="productGender"
+              /><input
+                id="prod_frameMaterial"
+                type="text"
+                name="frameMatirial"
+                placeholder="frameMaterial"
+              />
+            </div>
+            <h4>glasses relations</h4>
+            <div class="sec_prod_set">
+              <select id="glasses--Type" name="glassesType">
+                <option value="">Glasses Type</option>
+                <option value="prescription">Prescription</option>
+                <option value="sunglasses">Sunglasses</option>
+              </select>
+              <select id="glasses--collections" name="collections">
+                <option value="">collections</option>
+                <option value=""></option>
+              </select>
+              <select id="glasses--categories" name="categories">
+                <option value="">categories</option>
+                <% if (categories){ %> <% categories.map(cat=>{%>
+                <option value="<%= cat.id %>"><%= cat.name %></option>
+                <% }) %> <% } %>
+              </select>
+              <select id="glasses--lenses" placeholder="lenses" name="lenses">
+                <option value="">lenses</option>
+                <option value=""></option>
+              </select>
+            </div>
+            <h4>glasses previews</h4>
+            <div class="product_imgs">
+              <label class="pre_img" for="img_1"
+                ><input
+                  class="prod_img_preview"
+                  id="img_1"
+                  type="file"
+                  name="images" /></label
+              ><label for="img_2"
+                ><input
+                  class="prod_img_preview"
+                  id="img_2"
+                  type="file"
+                  name="images" /></label
+              ><label for="img_3"
+                ><input
+                  class="prod_img_preview"
+                  id="img_3"
+                  type="file"
+                  name="images" /></label
+              ><label for="img_4"
+                ><input
+                  class="prod_img_preview"
+                  id="img_4"
+                  type="file"
+                  name="images" /></label
+              ><label for="img_5"
+                ><input
+                  class="prod_img_preview"
+                  id="img_5"
+                  type="file"
+                  name="images"
+              /></label>
+            </div>
+            <h4>description</h4>
+            <div class="last_set">
+              <textarea
+                id="prod_description"
+                name="description"
+                cols="30"
+                rows="10"
+              ></textarea>
+            </div>
+            <input class="add_glasses_btn" type="submit" value="Publish" />
+          </form>
+          <h3>add 3D Objects for Try-on</h3>
+          <form class="add_virtuals" id="try_on_form">
+            <input
+              class="selected_prod"
+              id="selected_prod"
+              type="text"
+              name="productId"
+              placeholder="glasses id "
+              value=""
+            /><input
+              id="vurtial_inputs"
+              type="file"
+              name="virtualsObject"
+              multiple=""
+            /><input class="add_virtual_btn" type="submit" value="Save" />
+          </form>
+        </div>
+      </div>
+      <div class="navigation">
+        <a href="/admin" class="logo"> mhsOptics </a>
+        <ul class="main_list">
+          <li>
+            <a href="/admin">
+              <span class="material-icons"> home </span>
+              <span class="text">Dashboard </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-banners-setting">
+              <span class="material-icons"> ad_units </span>
+              <span class="text">Banners </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-users-setting">
+              <span class="material-icons"> people </span>
+              <span class="text"> Users </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-orders-setting">
+              <span class="material-icons"> bookmark_border </span>
+              <span class="text">Orders </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-products-setting" class="active">
+              <span class="material-icons"> production_quantity_limits </span>
+              <span class="text">Products </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-lenses-setting">
+              <span class="material-icons"> lens </span>
+              <span class="text">Lens</span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-categories-setting">
+              <span class="material-icons"> category </span>
+              <span class="text">categoris </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-collections-setting">
+              <span class="material-icons"> collections </span>
+              <span class="text">Collections </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-announcments-setting">
+              <span class="material-icons"> campaign </span>
+              <span class="text">Announcment </span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-pages-setting">
+              <span class="material-icons"> article </span>
+              <span class="text">Pages</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="container">
+        <header class="dashboard__header">
+          <a class="toggle_nav">
+            <svg viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </a>
+          <div class="nav">Hamza belghazi</div>
+        </header>
+        <section class="main__section">
+          <div class="actions__container">
+            <div class="section__title">
+              <h2 class="title">Product settings</h2>
+              <a href="#" class="add add_simple_btn">Add Product</a>
+            </div>
+            <div class="table100">
+              <table>
+                <thead>
+                  <tr class="table100-head">
+                    <th class="column3">Product Name</th>
+                    <th class="column4">preview</th>
+                    <th class="column7">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="products--list">
+                  <% if(products) {%> <% products.map( prod => { %>
+                  <tr>
+                    <td class="column3"><%= prod.title %></td>
+                    <td class="column4">
+                      <img
+                        class="product__preview"
+                        src="/img/products/<%= prod.images[0] %>"
+                        alt=""
+                      />
+                    </td>
+                    <td class="column7">
+                      <span
+                        data-id="<%= prod.id %> "
+                        class="material-icons delete delete--prode"
+                      >
+                        delete
+                      </span>
+                    </td>
+                  </tr>
+                  <% }) %> <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <%- include('_admin-footer'); %>
+      </div>
+    </main>
+  </body>
+</html>

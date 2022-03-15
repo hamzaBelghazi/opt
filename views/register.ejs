@@ -1,0 +1,56 @@
+<!-- section signup -->
+<section class="register_section section">
+  <form class="register_form form--register">
+    <div class="container">
+      <h1><%= __('register') %> </h1>
+      <p><%= __('register_text') %> </p>
+      <img src="/assets/register.svg" alt="register" />
+      <label for="fName"><b><%= __('first_name') %> </b></label
+      ><input
+        id="fName"
+        type="text"
+        placeholder="<%= __('firstName_placeholder') %>"
+        name="fName"
+        required=""
+      /><label for="lName"><b><%= __('last_name') %> </b></label
+      ><input
+        id="LName"
+        type="text"
+        placeholder='<%= __("lastName_placeholder") %>'
+        name="LName"
+        required=""
+      /><label for="email"><b><%= __('email') %></b></label
+      ><input
+        id="email"
+        type="text"
+        placeholder="<%= __('email_placeholder') %>"
+        name="email"
+        required=""
+      /><label for="psw"><b><b><%= __('password') %></b></label
+      ><input
+        id="psw"
+        type="password"
+        placeholder="<%= __('password_placeholder') %>"
+        name="psw"
+        required=""
+      /><label for="psw-repeat"><b><%= __('repeat_password') %></b></label
+      ><input
+        id="psw-repeat"
+        type="password"
+        placeholder="<%= __('password_repeat_placeholder') %>"
+        name="psw-repeat"
+        required=""
+      />
+      <p>
+        <%= __('register_notice') %>
+        <a href="#"> <%= __('terms_Condition') %> </a>.
+      </p>
+      <button class="registerbtn" type="submit"><%= __('Signup_btn') %></button>
+    </div>
+    <div class="container signin">
+      <p>
+        <%= __('already_have') %>  <a href="/login"> <%= __('login_btn') %> </a>.
+      </p>
+    </div>
+  </form>
+</section>

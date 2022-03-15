@@ -1,0 +1,55 @@
+<div class="page_header">
+  <div class="navigation">
+    <a href="/">Home</a>
+    <span class="siparetor">/</span>
+    <div class="subtitle"><%= __('returns') %></div>
+  </div>
+</div>
+<div class="return__section section">
+  <div class="return_img">
+    <img src="/assets/return.svg" alt="returns" />
+  </div>
+  <div class="return_info">
+    <h1><%= __('returns_title') %></h1>
+    <p class="notice"><%= __('notice_1') %></p>
+    <p class="notice"><%= __('notice_2') %></p>
+
+    <div class="return_remarque remaque_danger">
+      <p>
+        <%= __('remaque_start') %>
+        <a href="mailto:support@mhsoptics.be">support@mhsoptics.be</a>. Any <%=
+        __('remarque_end') %> <a href="#"> <%= __('tos') %> </a> .
+      </p>
+    </div>
+    <h3>What is covered by the 2 year warranty?</h3>
+    <table>
+      <thead>
+        <tr class="table100-head">
+          <th class="column2"></th>
+          <th class="column4">✔ <%= __('covered') %></th>
+          <th class="column7">✘ <%= __('uncovered') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table100-head">
+          <td class="column2"><%= __('glasses') %></td>
+          <td class="column4"><%= __('covered_glasses') %></td>
+          <td class="column7"><%= __('uncovered_glasses') %></td>
+        </tr>
+        <tr class="table100-head">
+          <td class="column2"><%= __('frames') %></td>
+          <td class="column4"><%= __('covered_frames') %></td>
+          <td class="column7"><%= __('uncovered_frames') %></td>
+        </tr>
+      </tbody>
+    </table>
+    <p><%= __('paragh') %></p>
+    <div class="return_remarque remaque_lite">
+      <p>
+        <%= __('remarque_Lite_start') %>
+        <a href="mailto:support@mhsoptics.be">support@mhsoptics.be</a>.<%=
+        __('remarque_Lite_end') %>
+      </p>
+    </div>
+  </div>
+</div>

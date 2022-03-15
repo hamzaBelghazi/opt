@@ -15,4 +15,10 @@ const categorySchema = mongoose.Schema({
 
 const Category = mongoose.model('Category', categorySchema);
 
+categorySchema.pre('save', async function (next) {
+  this.link = 'hamza';
+  console.log(this.link);
+  next();
+});
+
 module.exports = Category;

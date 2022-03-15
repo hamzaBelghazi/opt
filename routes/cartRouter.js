@@ -2,7 +2,7 @@ const router = require('express').Router();
 const authController = require('../controllers/authController');
 const cartController = require('../controllers/cartController');
 
-router.post('/:itemId', cartController.deletItem);
+router.delete('/:itemId', cartController.deletItem);
 router.post(
   '/item/addglassesWithlenses/:itemId',
   cartController.addglassesWithlenses

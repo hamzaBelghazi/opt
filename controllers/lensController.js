@@ -34,9 +34,8 @@ exports.resizeLensImages = catchAsync(async (req, res, next) => {
       Math.random() * 11111111111
     )}-${Date.now()}-lens.png`;
     await sharp(el.buffer)
-      .resize(200, 133)
       .toFormat('png')
-      .jpeg({ quality: 100 })
+      .png({ quality: 100 })
       .toFile(`public/img/lenses/${req.body.thickness[number].photo}`);
   });
 
