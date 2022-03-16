@@ -12,9 +12,12 @@ function test_resizeCanvas() {
 // entry point:
 function mirrorTryOn() {
   JEELIZVTOWIDGET.start({
-    searchImageMask: 'https://appstatic.jeeliz.com/jeewidget/images/target.png',
+    searchImageMask: '/assets/loading.png',
     searchImageColor: 0xeeeeee,
-    callbackReady: function () {},
+    callbackReady: function () {
+      const { ver } = document.querySelector('.ver__btn').dataset;
+      JEELIZVTOWIDGET.load_modelStandalone(`/img/tryon/${ver}`);
+    },
     onError: function (errorLabel) {
       alert('An error happened. errorLabel =' + errorLabel);
       switch (errorLabel) {

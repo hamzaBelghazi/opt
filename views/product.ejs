@@ -26,7 +26,7 @@
       <% if(product.virualsTrys) {%>
       <% if(product.virualsTrys[0]?.virtualsObject) {%>
        <% product.virualsTrys[0].virtualsObject.map((v)=> {  %>
-        <button
+        <button data-ver="<%= v %>" class="ver__btn"
           onclick="JEELIZVTOWIDGET.load_modelStandalone('/img/tryon/<%= v %>')"
         >
           Model
