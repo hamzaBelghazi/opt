@@ -60,8 +60,9 @@
         <span class="year"></span>
       </p>
       <div class="policy">
-        <a href="#"> <%= __('terms_Condition') %> </a>
-        <a href="#"> <%= __('privacy_Notice') %> </a>
+        <% if(pages){ %> <% pages.map(page=>{ %>
+        <a href="/page/<%= page.id %> "> <%= page.name %> </a>
+        <% }) %> <% } %>
       </div>
     </div>
   </div>
