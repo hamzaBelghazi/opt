@@ -208,16 +208,19 @@ exports.getAccount = catchAsync(async (req, res) => {
     return res.redirect('/');
   }
   const orders = await Order.find({ user: res.locals.user });
-  const obj = orders.map((order) => {
-    return {
-      isComplet: order.isComplet,
-      id: order.id,
-      orderNum: order.orderNum,
-      totalPrice: order.products[0]?.price,
-      quantity: order.products[0]?.quantity,
-      item: order.products[0]?.item,
-    };
-  });
+  let obj = [];
+  if (orders) {
+    obj = orders.map((order) => {
+      return {
+        isComplet: order.isComplet,
+        id: order.id,
+        orderNum: order.orderNum,
+        totalPrice: order.products[0]?.price,
+        quantity: order.products[0]?.quantity,
+        item: order.products[0]?.item,
+      };
+    });
+  }
   const favorite = await Favourit.find({ user: res.locals.user }).populate(
     'product'
   );
@@ -326,17 +329,19 @@ exports.lensSetPanel = catchAsync(async (req, res, next) => {
 });
 exports.orderSetPanel = catchAsync(async (req, res, next) => {
   const orders = await Order.find();
-  const obj = orders.map((order) => {
-    return {
-      isComplet: order.isComplet,
-      id: order.id,
-      orderNum: order.orderNum,
-      totalPrice: order.products[0]?.price,
-      quantity: order.products[0]?.quantity,
-      item: order.products[0]?.item,
-    };
-  });
-
+  let obj = [];
+  if (orders) {
+    obj = orders.map((order) => {
+      return {
+        isComplet: order.isComplet,
+        id: order.id,
+        orderNum: order.orderNum,
+        totalPrice: order.products[0]?.price,
+        quantity: order.products[0]?.quantity,
+        item: order.products[0]?.item,
+      };
+    });
+  }
   res.render('admin/orders-setting', {
     layout: 'admin/orders-setting',
     orders: obj,
