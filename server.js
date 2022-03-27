@@ -15,23 +15,6 @@ const MongoStore = require('connect-mongo');
 const ejs = require('ejs');
 const ejsLayout = require('express-ejs-layouts');
 
-const AppError = require('./utils/appError');
-const globalErrorHandler = require('./controllers/errorController');
-const userRouter = require('./routes/userRouter');
-const productRouter = require('./routes/productRouter');
-const lensRouter = require('./routes/lensRouter');
-const viewRouter = require('./routes/viewRouter');
-const bannerRouter = require('./routes/bannerRouter');
-const categoryRouter = require('./routes/categoryRouter');
-const collectionRouter = require('./routes/collectionRouter');
-const virtualTryRouter = require('./routes/virtualTryRouter');
-const cartRouter = require('./routes/cartRouter');
-const orderRouter = require('./routes/orderRouter');
-const announceRouter = require('./routes/annouceRouter');
-const pageRouter = require('./routes/pageRouter');
-const favouritRouter = require('./routes/favouritRouter');
-const orderController = require('./controllers/orderController');
-
 const { I18n } = require('i18n');
 
 const app = express();
@@ -52,6 +35,23 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
+
+const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/errorController');
+const userRouter = require('./routes/userRouter');
+const productRouter = require('./routes/productRouter');
+const lensRouter = require('./routes/lensRouter');
+const viewRouter = require('./routes/viewRouter');
+const bannerRouter = require('./routes/bannerRouter');
+const categoryRouter = require('./routes/categoryRouter');
+const collectionRouter = require('./routes/collectionRouter');
+const virtualTryRouter = require('./routes/virtualTryRouter');
+const cartRouter = require('./routes/cartRouter');
+const orderRouter = require('./routes/orderRouter');
+const announceRouter = require('./routes/annouceRouter');
+const pageRouter = require('./routes/pageRouter');
+const favouritRouter = require('./routes/favouritRouter');
+const orderController = require('./controllers/orderController');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

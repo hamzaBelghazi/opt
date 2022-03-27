@@ -18,11 +18,7 @@ router.get('/collections/:col', viewsController.getBycollection);
 router.get('/categories/:cat', viewsController.getBycategory);
 router.get('/forggotPassword', viewsController.forggetPass);
 
-router.get(
-  '/register',
-
-  viewsController.getRegisterForm
-);
+router.get('/register', viewsController.getRegisterForm);
 
 router.get('/users/resetPassword/:token', viewsController.passChange);
 router.get('/search', viewsController.getSearch);
