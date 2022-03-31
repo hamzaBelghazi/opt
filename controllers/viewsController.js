@@ -62,7 +62,7 @@ exports.getPage = catchAsync(async (req, res, next) => {
   const page = await Page.findById(req.params.id);
 
   res.status(200).render('page', {
-    title: 'page.name',
+    title: page.name,
     page,
   });
 });

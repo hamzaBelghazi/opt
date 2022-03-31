@@ -355,31 +355,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 //   });
 // });
 
-const createOrderCheckout = async (obj) => {
-  const user = (await User.findOne({ email: obj.customer_email })).id;
-  const product = obj.display_items.id;
-  const amount = obj.display_items.amount / 100;
-  await Order.create({ product, user, amount });
-  req.session.cart = {};
-};
 
-exports.webhookCheckout = (req, res, next) => {
-  const signature = request.headers['stripe-signature'];
-  let event;
-  try {
-    event = stripe.webhooks.constructEvent(
-      req.body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
-  } catch (err) {
-    res.status(400).send(`there is an error ${err}`);
-  }
-  if (event.type === 'checkout.session.completed') {
-    createOrderCheckout(event.data.object);
-  }
-  res.status(200).json({ received: true });
-};
 
 exports.createOrder = factory.createOne(Order);
 exports.getOrder = factory.getOne(Order);
