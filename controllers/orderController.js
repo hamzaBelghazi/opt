@@ -11,6 +11,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   let arrCart = cart.list().map((i) => {
     if (i.item.type === 'glassesWithlense') {
       return {
+	id: i.item.id,
         name: `${i.item.item.title} + 2xEyeglasses for ${
           i.item.lenses.lensesType.type
         } ${i.item.lenses.thicknessType.type || 'no'} thikness , and ${
@@ -28,7 +29,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         quantity: i.quantity,
       };
     }
-    return {
+    return { 
+      id: i.item.id,
       name: `${i.item.title}`,
       description: i.item.description,
       images: [
@@ -331,6 +333,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       },
     ],
     line_items: arrCart,
+    expand : ['line_items'],
     allow_promotion_codes: true,
   });
 
@@ -341,29 +344,16 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
-// exports.createOrderCheckout = catchAsync(async (req, res, next) => {
-//   const { user, amount } = req.query;
-//   const cart = new Cart(req.session.cart);
-//   const products = cart.list();
 
-//   if (!products && !user && !amount) return next();
-
-//   await Order.create({ products, user, amount });
-//   req.session.cart = {};
-//   res.redirect('/success', {
-//     title: ' all is done 😆',
-//   });
-// });
-
-const createOrderCheckout = async (session) => {
+const createOrderCheckout = async (session , items ) => {
   const user = (await User.findOne({ email: session.customer_email })).id;
-  const product = session.display_items[0].id;
-  const amount = session.display_items[0].amount / 100;
+  const product = items.data.id;
+  const amount = items.data.amount / 100;
   await Order.create({ product, user, amount });
   req.session.cart = {};
 };
 
-exports.webhookCheckout = (req, res, next) => {
+exports.webhookCheckout = async (req, res, next) => {
   const signature = req.headers['stripe-signature'];
 
   let event;
@@ -377,9 +367,17 @@ exports.webhookCheckout = (req, res, next) => {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
-  if (event.type === 'checkout.session.completed')
-    createOrderCheckout(event.data.object);
-
+  if (event.type === 'checkout.session.completed'){
+     const session = event.data.object ;
+     const { line_items } = await stripe.checkout.sessions.retrieve(
+          session.id,
+          {
+            expand: ["line_items"],
+          }
+        );
+    console.log(line_items);	
+    createOrderCheckout(event.data.object , line_items);
+  }
   res.status(200).json({ received: true });
 };
 

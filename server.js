@@ -9,6 +9,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const xssAdvanced = require('xss-advanced');
 const hpp = require('hpp');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -104,7 +105,7 @@ const limiter = rateLimit({
 
 app.post(
   '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
+  bodyParser.raw({ type: 'application/json' }),
   orderController.webhookCheckout
 );
 

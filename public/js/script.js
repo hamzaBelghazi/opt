@@ -44,7 +44,7 @@ if (document.querySelector('.splide')) {
     width: '100%',
     perPage: 1,
     autoScroll: {
-      speed: 2,
+      speed: 1,
     },
   });
 

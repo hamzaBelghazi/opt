@@ -57,7 +57,7 @@
           <div class="subtotal__container">
             <span class="subtotal__text"> <%= __('cart_subtotal') %> </span>
             <p class="subtotal__amount">
-              <%= totalPrice %> <span class="currency"> $ </span>
+              <%= `${totalPrice.toFixed(2)}` %> <span class="currency"> $ </span>
             </p>
           </div>
           <a class="primary_button checkout__btn checkout_btn" href="#">
@@ -221,7 +221,7 @@
           />
         </svg>
         <p class="total_price">
-          <%= `${totalPrice ? totalPrice : '0'}` %>
+          <%= `${totalPrice ? totalPrice.toFixed(2) :  '0' }` %>
           <span class="currency">$</span>
         </p>
       </a>
